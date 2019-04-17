@@ -46,6 +46,7 @@ public class GestionArtistes extends JFrame {
 	 * Create the frame.
 	 */
 	public GestionArtistes() {
+		setTitle("Gestion des Albums");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/vue/icon.png")));
 		setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -80,7 +81,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 5;
 		gbc_textField.insets = new Insets(0, 25, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.fill = GridBagConstraints.BOTH;
 		gbc_textField.gridx = 0;
 		gbc_textField.gridy = 1;
 		panel.add(textField, gbc_textField);
@@ -194,7 +195,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_txtNumero = new GridBagConstraints();
 		gbc_txtNumero.gridwidth = 3;
 		gbc_txtNumero.insets = new Insets(0, 0, 5, 10);
-		gbc_txtNumero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNumero.fill = GridBagConstraints.BOTH;
 		gbc_txtNumero.gridx = 1;
 		gbc_txtNumero.gridy = 8;
 		panel.add(txtNumero, gbc_txtNumero);
@@ -225,7 +226,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_txtNom = new GridBagConstraints();
 		gbc_txtNom.gridwidth = 3;
 		gbc_txtNom.insets = new Insets(0, 0, 5, 10);
-		gbc_txtNom.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNom.fill = GridBagConstraints.BOTH;
 		gbc_txtNom.gridx = 1;
 		gbc_txtNom.gridy = 9;
 		panel.add(txtNom, gbc_txtNom);
@@ -235,7 +236,7 @@ public class GestionArtistes extends JFrame {
 		lblMembre.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblMembre = new GridBagConstraints();
 		gbc_lblMembre.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblMembre.insets = new Insets(0, 25, 25, 5);
+		gbc_lblMembre.insets = new Insets(4, 25, 25, 5);
 		gbc_lblMembre.gridx = 0;
 		gbc_lblMembre.gridy = 10;
 		panel.add(lblMembre, gbc_lblMembre);
@@ -244,7 +245,7 @@ public class GestionArtistes extends JFrame {
 		chckbxMembre.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_chckbxMembre = new GridBagConstraints();
 		gbc_chckbxMembre.anchor = GridBagConstraints.NORTHWEST;
-		gbc_chckbxMembre.insets = new Insets(0, 0, 25, 10);
+		gbc_chckbxMembre.insets = new Insets(3, 0, 25, 10);
 		gbc_chckbxMembre.gridx = 1;
 		gbc_chckbxMembre.gridy = 10;
 		panel.add(chckbxMembre, gbc_chckbxMembre);
