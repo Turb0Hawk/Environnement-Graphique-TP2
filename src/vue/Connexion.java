@@ -10,14 +10,38 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import controleur.GestionnaireEvent;
+
 import javax.swing.JButton;
 import java.awt.Toolkit;
 
-public class Connexion {
+public class Connexion extends JFrame {
 
+	private static final long serialVersionUID = 6L;
 	private JFrame frmGestionDesAlbums;
 	private JTextField txtUser;
+	
+	public JTextField getTxtUser() {
+		return txtUser;
+	}
+
+	public JTextField getTxtMDP() {
+		return txtMDP;
+	}
+
+	public JButton getBtnValider() {
+		return btnValider;
+	}
+
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+
 	private JTextField txtMDP;
+	private JButton btnValider;
+	private JButton btnQuitter;
+	private GestionnaireEvent event;
 
 	/**
 	 * Launch the application.
@@ -39,6 +63,7 @@ public class Connexion {
 	 * Create the application.
 	 */
 	public Connexion() {
+		event = new GestionnaireEvent(this);
 		initialize();
 	}
 
@@ -82,6 +107,7 @@ public class Connexion {
 		panel.add(lblNomDutilisateur, gbc_lblNomDutilisateur);
 		
 		txtUser = new JTextField();
+		txtUser.getDocument().addDocumentListener( event );
 		txtUser.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		GridBagConstraints gbc_txtUser = new GridBagConstraints();
 		gbc_txtUser.gridwidth = 2;
@@ -102,6 +128,7 @@ public class Connexion {
 		panel.add(lblMotDePasse, gbc_lblMotDePasse);
 		
 		txtMDP = new JTextField();
+		txtMDP.getDocument().addDocumentListener(event);
 		txtMDP.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		txtMDP.setColumns(10);
 		GridBagConstraints gbc_txtMDP = new GridBagConstraints();
@@ -121,7 +148,8 @@ public class Connexion {
 		gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		JButton btnValider = new JButton("Valider");
+		btnValider = new JButton("Valider");
+		btnValider.addActionListener(event);
 		btnValider.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnValider = new GridBagConstraints();
 		gbc_btnValider.anchor = GridBagConstraints.EAST;
@@ -130,7 +158,8 @@ public class Connexion {
 		gbc_btnValider.gridy = 0;
 		panel_1.add(btnValider, gbc_btnValider);
 		
-		JButton btnQuitter = new JButton("Quitter");
+		btnQuitter = new JButton("Quitter");
+		btnQuitter.addActionListener(event);
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.insets = new Insets(10, 5, 15, 0);

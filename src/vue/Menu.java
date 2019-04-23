@@ -1,11 +1,8 @@
 package vue;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.CardLayout;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
