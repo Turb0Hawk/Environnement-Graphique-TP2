@@ -47,7 +47,7 @@ public class Connexion {
 	 */
 	private void initialize() {
 		frmGestionDesAlbums = new JFrame();
-		frmGestionDesAlbums.setIconImage(Toolkit.getDefaultToolkit().getImage(Connexion.class.getResource("/vue/icon.png")));
+		frmGestionDesAlbums.setIconImage(Toolkit.getDefaultToolkit().getImage(Connexion.class.getResource("/Ressources/icon.png")));
 		frmGestionDesAlbums.setResizable(false);
 		frmGestionDesAlbums.setTitle("Gestion des Albums");
 		frmGestionDesAlbums.setBounds( 100, 100, 424, 218 );

@@ -49,7 +49,7 @@ public class GestionArtistes extends JFrame {
 	public GestionArtistes() {
 		setTitle("Gestion des Albums");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/vue/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/Ressources/icon.png")));
 		setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setBounds( 100, 100, 613, 442 );

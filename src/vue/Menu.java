@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
+import java.awt.Toolkit;
 
 public class Menu {
 
@@ -47,6 +48,7 @@ public class Menu {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/Ressources/icon.png")));
 		frame.setBounds( 100, 100, 728, 541 );
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		GridBagLayout gridBagLayout = new GridBagLayout();
