@@ -5,23 +5,17 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import modele.*;
 import vue.Menu;
 
 public class Controleur {
 
-	ConnexionApp modele = new ConnexionApp();
+	ConnexionDB modele = new ConnexionDB();
 
 	public Controleur() {
 

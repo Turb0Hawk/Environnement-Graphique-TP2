@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
-
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
-public class ConnexionApp {
+public class ConnexionDB {
 
 	private static final String user = "BiblioAdmin";
 	private static final String password = "test1";
@@ -20,7 +18,7 @@ public class ConnexionApp {
 
 	public Connection conn = null;
 
-	public ConnexionApp() {
+	public ConnexionDB() {
 		try {
 			Class.forName( "com.mysql.cj.jdbc.Driver" ).newInstance();
 

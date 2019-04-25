@@ -8,14 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import controleur.*;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
-
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,8 +21,6 @@ import java.awt.Toolkit;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class GestionArtistes extends JFrame {
