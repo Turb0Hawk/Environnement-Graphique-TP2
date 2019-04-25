@@ -38,12 +38,27 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 				System.exit( 0 );
 			}
 		} else if ( frame instanceof Menu ) {
-			Menu menu = (Menu)frame;
+			Menu menu = (Menu) frame;
+			if ( e.getSource() == menu.getBtnQuitter() ) {
+				System.exit( 0 );
+			}
+			if ( e.getSource() == menu.getBtnArtistes() ) {
+				menu.dispose();
+				new GestionArtistes().setVisible( true );
+			}
+			if ( e.getSource() == menu.getBtnAlbums() ) {
+				menu.dispose();
+				new GestionAlbums().setVisible( true );
+			}
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes)frame;
+			GestionArtistes artistes = (GestionArtistes) frame;
+			if ( e.getSource() == artistes.getBtnQuitter() ) {
+				artistes.dispose();
+				new Menu().setVisible( true );
+			}
 		} else if ( frame instanceof GestionAlbums ) {
-			GestionAlbums album = (GestionAlbums)frame;
-		} 
+			GestionAlbums album = (GestionAlbums) frame;
+		}
 
 	}
 
@@ -57,12 +72,12 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 				// TODO event champ texte mot de passe
 			}
 		} else if ( frame instanceof Menu ) {
-			Menu menu = (Menu)frame;
+			Menu menu = (Menu) frame;
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes)frame;
+			GestionArtistes artistes = (GestionArtistes) frame;
 		} else if ( frame instanceof GestionAlbums ) {
-			GestionAlbums album = (GestionAlbums)frame;
-		} 
+			GestionAlbums album = (GestionAlbums) frame;
+		}
 	}
 
 	@Override
