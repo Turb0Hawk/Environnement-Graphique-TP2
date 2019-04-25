@@ -1,10 +1,12 @@
 package vue;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controleur.GestionnaireEvent;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -27,29 +29,49 @@ public class GestionAlbums extends JFrame {
 	private JTextField txtNumero;
 	private JTextField txtTitre;
 	private JTextField txtAnnee;
+	private JButton btnRecherche;
+	private JButton btnQuitter;
+	private JButton btnNouveau;
+	private JButton btnAjouter;
+	private JButton btnModifier;
+	private JButton btnRemplacer;
+	private JButton btnSupprimer;
+	private GestionnaireEvent event;
+	
+	public JButton getBtnRecherche() {
+		return btnRecherche;
+	}
 
-	/**
-	 * Launch the application. TODO à deleter.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					GestionAlbums frame = new GestionAlbums();
-					frame.setVisible( true );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+
+	public JButton getBtnNouveau() {
+		return btnNouveau;
+	}
+
+	public JButton getBtnAjouter() {
+		return btnAjouter;
+	}
+
+	public JButton getBtnModifier() {
+		return btnModifier;
+	}
+
+	public JButton getBtnRemplacer() {
+		return btnRemplacer;
+	}
+
+	public JButton getBtnSupprimer() {
+		return btnSupprimer;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GestionAlbums() {
+		event = new GestionnaireEvent(this);
 		setTitle("Gestion des Albums");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/Ressources/icon.png")));
@@ -91,7 +113,7 @@ public class GestionAlbums extends JFrame {
 		panel.add(txtAlbum, gbc_txtAlbum);
 		txtAlbum.setColumns(10);
 		
-		JButton btnRecherche = new JButton("Recherche");
+		btnRecherche = new JButton("Recherche");
 		btnRecherche.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnRecherche = new GridBagConstraints();
 		gbc_btnRecherche.insets = new Insets(0, 0, 5, 5);
@@ -99,7 +121,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
-		JButton btnQuitter = new JButton("Quitter");
+		JButton btnQuitter = new JButton("Retour");
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
@@ -139,7 +161,7 @@ public class GestionAlbums extends JFrame {
 		gbc_tableAlbums.gridy = 3;
 		panel.add(tableAlbums, gbc_tableAlbums);
 		
-		JButton btnNouveau = new JButton("Nouveau");
+		btnNouveau = new JButton("Nouveau");
 		btnNouveau.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnNouveau = new GridBagConstraints();
 		gbc_btnNouveau.fill = GridBagConstraints.BOTH;
@@ -148,7 +170,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnNouveau.gridy = 3;
 		panel.add(btnNouveau, gbc_btnNouveau);
 		
-		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
 		gbc_btnAjouter.fill = GridBagConstraints.HORIZONTAL;
@@ -157,7 +179,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnAjouter.gridy = 4;
 		panel.add(btnAjouter, gbc_btnAjouter);
 		
-		JButton btnModifier = new JButton("Modifier");
+		btnModifier = new JButton("Modifier");
 		btnModifier.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
 		gbc_btnModifier.fill = GridBagConstraints.HORIZONTAL;
@@ -166,7 +188,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnModifier.gridy = 5;
 		panel.add(btnModifier, gbc_btnModifier);
 		
-		JButton btnRemplacer = new JButton("Remplacer");
+		btnRemplacer = new JButton("Remplacer");
 		btnRemplacer.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnRemplacer = new GridBagConstraints();
 		gbc_btnRemplacer.fill = GridBagConstraints.HORIZONTAL;
@@ -176,7 +198,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRemplacer.gridy = 6;
 		panel.add(btnRemplacer, gbc_btnRemplacer);
 		
-		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnSupprimer = new GridBagConstraints();
 		gbc_btnSupprimer.fill = GridBagConstraints.HORIZONTAL;
@@ -315,6 +337,14 @@ public class GestionAlbums extends JFrame {
 		gbc_txtAnnee.gridy = 12;
 		panel.add(txtAnnee, gbc_txtAnnee);
 		txtAnnee.setColumns(10);
+		
+		btnAjouter.addActionListener( event );
+		btnModifier.addActionListener( event );
+		btnNouveau.addActionListener( event );
+		btnQuitter.addActionListener( event );
+		btnRecherche.addActionListener( event );
+		btnRemplacer.addActionListener( event );
+		btnSupprimer.addActionListener( event );
 	}
 
 }
