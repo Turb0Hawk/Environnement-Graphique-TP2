@@ -8,7 +8,9 @@ import java.sql.Statement;
 
 public class ConnexionApp {
 	
-	private static String urlConnection = "jdbc:mysql://localhost/BibliothequeDeMusique";
+	private static final String urlConnection = "jdbc:mysql://localhost/BibliothequeDeMusique";
+	private static final String user = "BiblioAdmin";
+	private static final String password = "MusiqueAdmin";
 	
 	public Connection conn = null;
 	
@@ -25,7 +27,7 @@ public class ConnexionApp {
 			e1.printStackTrace();
 		}
 		try {
-			conn = DriverManager.getConnection(urlConnection,"BiblioAdmin","MusiqueAdmin");
+			conn = DriverManager.getConnection(urlConnection, user, password);
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}

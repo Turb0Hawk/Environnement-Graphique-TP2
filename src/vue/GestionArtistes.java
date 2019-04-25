@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controleur.GestionnaireEvent;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -25,6 +28,7 @@ public class GestionArtistes extends JFrame {
 	private JTable tableArtistes;
 	private JTextField txtNumero;
 	private JTextField txtNom;
+	private GestionnaireEvent event;
 
 	/**
 	 * Launch the application. TODO à deleter.
@@ -47,6 +51,7 @@ public class GestionArtistes extends JFrame {
 	 */
 	@SuppressWarnings("rawtypes")
 	public GestionArtistes() {
+		event = new GestionnaireEvent(this);
 		setTitle("Gestion des Albums");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/Ressources/icon.png")));
