@@ -1,7 +1,12 @@
 package controleur;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -13,9 +18,10 @@ import vue.GestionAlbums;
 import vue.GestionArtistes;
 import vue.Menu;
 
-public class GestionnaireEvent implements ActionListener, DocumentListener {
+public class GestionnaireEvent implements ActionListener, DocumentListener, MouseListener {
 
 	private JFrame frame = null;
+	private Controleur control = new Controleur();
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
@@ -26,7 +32,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
-				if ( true ) { //TODO changer la condition
+				if ( true ) { // TODO changer la condition
 
 					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
 							"Connexion à l'application", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
@@ -112,6 +118,47 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 	@Override
 	public void removeUpdate( DocumentEvent e ) {
 		changedUpdate( e );
+
+	}
+
+	@Override
+	public void mouseClicked( MouseEvent e ) {
+		if ( frame instanceof GestionArtistes ) {
+			GestionArtistes artistes = (GestionArtistes) frame;
+			if ( e.getSource() == artistes.getTableArtistes() ) {
+				Object[] row = control.obtenirUnArtiste( artistes.getTableArtistes().getSelectedRow()+1 );
+				artistes.setArtisteCourrant( row );
+			}
+			if ( e.getSource() == artistes.getListAlbum() ) {
+				ImageIcon img = control.obtenirUnAlbum( artistes.getListAlbum().getSelectedIndex()+1 );
+				artistes.setAlbumCourrant( img );
+			}
+		} else if ( frame instanceof GestionAlbums ) {
+			GestionAlbums album = (GestionAlbums) frame;
+		}
+	}
+
+	@Override
+	public void mouseEntered( MouseEvent e ) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited( MouseEvent e ) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed( MouseEvent e ) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased( MouseEvent e ) {
+		// TODO Auto-generated method stub
 
 	}
 

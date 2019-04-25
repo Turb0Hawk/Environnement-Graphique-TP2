@@ -2,11 +2,16 @@ package controleur;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -14,11 +19,11 @@ import javax.swing.table.TableModel;
 import modele.*;
 import vue.Menu;
 
-public class controleur {
+public class Controleur {
 
 	ConnexionApp modele = new ConnexionApp();
 
-	public controleur() {
+	public Controleur() {
 
 	}
 
@@ -42,7 +47,39 @@ public class controleur {
 		return tabArtistes;
 	}
 	
-	/** Returns an ImageIcon, or null if the path was invalid. */
+	public Object[] obtenirUnArtiste(int idArtiste) {
+		Object[] row = modele.getArtiste( idArtiste );
+		if ( row[3] != null ) {
+			try {
+				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
+				BufferedImage bImage = ImageIO.read( bis );
+				row[3] = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
+			} catch ( IOException e ) {
+				e.printStackTrace();
+			} 
+		}
+		return row;
+	}
+	
+	public DefaultListModel<String> obtenirAlbumsArtiste( int artisteId ) {
+		return modele.getAlbums( artisteId );
+	}
+	
+	public ImageIcon obtenirUnAlbum(int idAlbum) {
+		byte[] photo = modele.getAlbum( idAlbum );
+		ImageIcon couverture = null;
+		if ( photo != null ) {//redo
+			try {
+				ByteArrayInputStream bis = new ByteArrayInputStream( photo );
+				BufferedImage bImage = ImageIO.read( bis );
+			    couverture = new ImageIcon(bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH ));
+			} catch ( IOException e ) {
+				e.printStackTrace();
+			} 
+		}
+		return couverture;
+	}
+	
 	protected ImageIcon createImageIcon(String path,
 	                                           String description) {
 	    java.net.URL imgURL = getClass().getResource(path);
