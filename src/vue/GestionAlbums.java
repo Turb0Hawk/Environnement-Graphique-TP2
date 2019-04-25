@@ -42,6 +42,33 @@ public class GestionAlbums extends JFrame {
 	public JButton getBtnRecherche() {
 		return btnRecherche;
 	}
+<<<<<<< HEAD
+
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+
+	public JButton getBtnNouveau() {
+		return btnNouveau;
+	}
+
+	public JButton getBtnAjouter() {
+		return btnAjouter;
+	}
+
+	public JButton getBtnModifier() {
+		return btnModifier;
+	}
+
+	public JButton getBtnRemplacer() {
+		return btnRemplacer;
+	}
+
+	public JButton getBtnSupprimer() {
+		return btnSupprimer;
+	}
+=======
+>>>>>>> 630e19ce9a4b6ab2f648c8bc0f379762d6ed010c
 
 	public JButton getBtnQuitter() {
 		return btnQuitter;
@@ -68,26 +95,8 @@ public class GestionAlbums extends JFrame {
 	}
 
 	/**
-	 * Launch the application. TODO à deleter.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					GestionAlbums frame = new GestionAlbums();
-					frame.setVisible( true );
-					//event = new GestionnaireEvent( frame, event.ALBUM );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GestionAlbums() {
 		event = new GestionnaireEvent(this);
@@ -140,7 +149,11 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
+<<<<<<< HEAD
 		btnQuitter = new JButton("Retour au menu");
+=======
+		JButton btnQuitter = new JButton("Retour");
+>>>>>>> 630e19ce9a4b6ab2f648c8bc0f379762d6ed010c
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
