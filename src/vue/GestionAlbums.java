@@ -140,7 +140,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
-		btnQuitter = new JButton("Retour au menu");
+		JButton btnQuitter = new JButton("Retour");
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import modele.*;
 import vue.Connexion;
 import vue.GestionAlbums;
@@ -25,9 +26,19 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
-				if ( false ) {
-					// TODO faire la methode dans le modele pour vérifier le mdp
-					// et username
+				if ( true ) {
+
+					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
+							"Connexion à l'application", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
+						case JOptionPane.OK_OPTION:
+							conn.setVisible( false );
+							conn.dispose();
+							new Menu().setVisible( true );
+							break;
+	
+						default:
+							break;
+					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
 							"Le mot de passe ou le nom d'utilisateur entrés sont incorrects.", "Mauvais identifiants",
@@ -39,6 +50,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
+			
 			if ( e.getSource() == menu.getBtnQuitter() ) {
 				System.exit( 0 );
 			}
@@ -67,9 +79,18 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getDocument() == conn.getTxtUser().getDocument() ) {
+				if ( conn.getTxtUser().getText().isEmpty() || conn.getTxtMDP().getText().isEmpty() ) {
+					conn.getBtnValider().setEnabled( false );
+				} else {
+					conn.getBtnValider().setEnabled( true );
+				}
 
 			} else if ( e.getDocument() == conn.getTxtMDP().getDocument() ) {
-				// TODO event champ texte mot de passe
+				if ( conn.getTxtMDP().getText().isEmpty() || conn.getTxtUser().getText().isEmpty() ) {
+					conn.getBtnValider().setEnabled( false );
+				} else {
+					conn.getBtnValider().setEnabled( true );
+				}
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
@@ -82,13 +103,13 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 
 	@Override
 	public void insertUpdate( DocumentEvent e ) {
-		// TODO Auto-generated method stub
+		changedUpdate( e );
 
 	}
 
 	@Override
 	public void removeUpdate( DocumentEvent e ) {
-		// TODO Auto-generated method stub
+		changedUpdate( e );
 
 	}
 
