@@ -28,8 +28,8 @@ public class Controleur {
 
 	public DefaultTableModel initialiserArtistes( DefaultTableModel tabArtistes ) {
 		ImageIcon image;
-		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non");
-		ImageIcon imageTrue =  createImageIcon("/Ressources/iconTrue.png", "oui" );
+		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non" );
+		ImageIcon imageTrue = createImageIcon( "/Ressources/iconTrue.png", "oui" );
 		tabArtistes = modele.getArtistes();
 		for ( int i = 0; i < tabArtistes.getRowCount(); ++i ) {
 
@@ -45,8 +45,8 @@ public class Controleur {
 
 		return tabArtistes;
 	}
-	
-	public Object[] obtenirUnArtiste(int idArtiste) {
+
+	public Object[] obtenirUnArtiste( int idArtiste ) {
 		Object[] row = modele.getArtiste( idArtiste );
 		if ( row[3] != null ) {
 			try {
@@ -55,52 +55,58 @@ public class Controleur {
 				row[3] = bImage.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return row;
 	}
-	
+
 	public DefaultListModel<String> obtenirAlbumsArtiste( int artisteId ) {
 		return modele.getAlbums( artisteId );
 	}
-	
-	public Image obtenirUnAlbum(int idAlbum) {
+
+	public Image obtenirUnAlbum( int idAlbum ) {
 		byte[] photo = modele.getAlbum( idAlbum );
 		Image couverture = null;
-		if ( photo != null ) {//redo
+		if ( photo != null ) {// redo
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( photo );
 				BufferedImage bImage = ImageIO.read( bis );
-			    couverture = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
+				couverture = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return couverture;
 	}
-	
-	protected ImageIcon createImageIcon(String path,
-	                                           String description) {
-	    java.net.URL imgURL = getClass().getResource(path);
-	    if (imgURL != null) {
-	    	Image Image = null;
-	    	   Image = Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) )
-			.getScaledInstance( 15, 15, Image.SCALE_SMOOTH );
-	        return new ImageIcon(Image, description);
-	    } else {
-	        System.err.println("Couldn't find file: " + path);
-	        return null;
-	    }
+
+	protected ImageIcon createImageIcon( String path, String description ) {
+		java.net.URL imgURL = getClass().getResource( path );
+		if ( imgURL != null ) {
+			Image Image = null;
+			Image = Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ).getScaledInstance( 15, 15,
+					Image.SCALE_SMOOTH );
+			return new ImageIcon( Image, description );
+		} else {
+			System.err.println( "Couldn't find file: " + path );
+			return null;
+		}
 	}
 
-	public void obtenirImage(JFrame parent) {
+	public ImageIcon obtenirImage( JFrame parent ) {
 		JFileChooser imageChooser = new JFileChooser();
-		imageChooser.setFileFilter( new FileNameExtensionFilter("Images (*.png, *.bmp)", "jpg", "png", "bmp") );
-		if(imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION){
-			if(imageChooser.getSelectedFile().exists()){
-				//TODO finir sa
+		Image Image = null;
+		imageChooser.setFileFilter( new FileNameExtensionFilter( "Images (*.png, *.bmp)", "jpg", "png", "bmp" ) );
+		if ( imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION ) {
+			if ( imageChooser.getSelectedFile().exists() ) {
+				try {
+
+					Image = ImageIO.read( imageChooser.getSelectedFile() ).getScaledInstance( 15, 15,
+							Image.SCALE_SMOOTH );
+				} catch ( IOException e ) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
+		return new ImageIcon( Image );
 	}
 }
