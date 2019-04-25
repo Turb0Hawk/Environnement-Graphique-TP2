@@ -1,5 +1,7 @@
 package modele;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ public class ConnexionDB {
 	private static final String password = "MusiqueAdmin";
 	private static final String urlConnection = "jdbc:mysql://localhost/BibliothequeDeMusique?user=" + user
 			+ "&password=" + password + "&serverTimezone=UTC";
+	private static final String UrlSqlLite = "jdbc:sqlite:" + Paths.get( "./src/BibliothequeMusique.db" ).toString();
 
 	public Connection conn = null;
 
@@ -30,7 +33,7 @@ public class ConnexionDB {
 	private void connUp() {
 
 		try {
-			conn = DriverManager.getConnection( urlConnection );
+			conn = DriverManager.getConnection( UrlSqlLite );
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}

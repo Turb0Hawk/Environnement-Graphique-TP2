@@ -8,11 +8,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import controleur.*;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +26,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class GestionArtistes extends JFrame {
 
@@ -347,8 +353,8 @@ public class GestionArtistes extends JFrame {
 		txtNom.setText( (String) donneesArtiste[1] );
 		chckbxMembre.setSelected( (boolean) donneesArtiste[2] );
 		if ( donneesArtiste[3] != null ) {
-			BufferedImage bImage = (BufferedImage) donneesArtiste[3];
-			panel_1.add( new JLabel( new ImageIcon( bImage ) ) );
+			panel_1.removeAll();
+			panel_1.add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
 		} else {
 			// metttre photo no images
 		}
@@ -356,8 +362,11 @@ public class GestionArtistes extends JFrame {
 		listArtiste.setModel( tabAlbums );
 	}
 
-	public void setAlbumCourrant( ImageIcon img ) {
-		panel_2.add( new JLabel( img ) );
+	public void setAlbumCourrant( Image img ) {
+		panel_2.removeAll();
+		if ( img != null ) {
+			panel_2.add( new JLabel( new ImageIcon( img ) ) );
+		}
 	}
 
 	public void nouvelArtiste( int nb ) {
@@ -365,5 +374,7 @@ public class GestionArtistes extends JFrame {
 		txtNumero.setText( String.valueOf( nb ) );
 		txtNom.setText( "" );
 		tabAlbums.clear();
+		panel_1.removeAll();
+		panel_2.removeAll();
 	}
 }

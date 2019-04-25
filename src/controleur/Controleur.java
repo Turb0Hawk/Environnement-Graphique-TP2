@@ -47,7 +47,7 @@ public class Controleur {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
 				BufferedImage bImage = ImageIO.read( bis );
-				row[3] = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
+				row[3] = bImage.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			} 
@@ -59,14 +59,14 @@ public class Controleur {
 		return modele.getAlbums( artisteId );
 	}
 	
-	public ImageIcon obtenirUnAlbum(int idAlbum) {
+	public Image obtenirUnAlbum(int idAlbum) {
 		byte[] photo = modele.getAlbum( idAlbum );
-		ImageIcon couverture = null;
+		Image couverture = null;
 		if ( photo != null ) {//redo
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( photo );
 				BufferedImage bImage = ImageIO.read( bis );
-			    couverture = new ImageIcon(bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH ));
+			    couverture = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			} 
