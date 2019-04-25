@@ -77,7 +77,7 @@ public class Connexion extends JFrame {
 		setResizable( false );
 		setTitle( "Gestion des Albums" );
 		setBounds( 100, 100, 424, 218 );
-		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
 		JPanel panel = new JPanel();
 		getContentPane().add( panel, BorderLayout.CENTER );
