@@ -10,15 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import modele.*;
-import vue.Connexion;
-import vue.GestionAlbums;
-import vue.GestionArtistes;
-import vue.Menu;
+import vue.*;
 
 public class GestionnaireEvent implements ActionListener, DocumentListener, MouseListener {
 
-	private JFrame frame = null;
-	private Controleur control = new Controleur();
+	private JFrame frame;
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
@@ -29,13 +25,13 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
-				if ( true ) { // TODO changer la condition
+				if ( ConnexionApp.verificationConn( conn.getTxtUser().getText(), conn.getTxtMDP().getText() ) ) {
 
 					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
-							"Connexion à l'application", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
-					case JOptionPane.OK_OPTION:
-						conn.setVisible( false );
-						conn.dispose();
+							"Connexion ï¿½ l'application", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
+					case JOptionPane.YES_OPTION:
+
+						frame.dispose();
 						new Menu().setVisible( true );
 						break;
 
@@ -44,7 +40,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
-							"Le mot de passe ou le nom d'utilisateur entrés sont incorrects.", "Mauvais identifiants",
+							"Le mot de passe ou le nom d'utilisateur entrï¿½s sont incorrects.", "Mauvais identifiants",
 							JOptionPane.ERROR_MESSAGE );
 				}
 

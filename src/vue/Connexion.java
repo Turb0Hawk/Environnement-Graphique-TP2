@@ -20,7 +20,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 public class Connexion extends JFrame {
 
 	private static final long serialVersionUID = 6L;
-	private JFrame frmGestionDesAlbums;
 	private JTextField txtUser;
 
 	public JTextField getTxtUser() {
@@ -61,7 +60,7 @@ public class Connexion extends JFrame {
 			public void run() {
 				try {
 					Connexion window = new Connexion();
-					window.frmGestionDesAlbums.setVisible( true );
+					window.setVisible( true );
 				} catch ( Exception e ) {
 					e.printStackTrace();
 				}
@@ -81,16 +80,15 @@ public class Connexion extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmGestionDesAlbums = new JFrame();
-		frmGestionDesAlbums.setIconImage(
+		setIconImage(
 				Toolkit.getDefaultToolkit().getImage( Connexion.class.getResource( "/Ressources/icon.png" ) ) );
-		frmGestionDesAlbums.setResizable( false );
-		frmGestionDesAlbums.setTitle( "Gestion des Albums" );
-		frmGestionDesAlbums.setBounds( 100, 100, 424, 218 );
-		frmGestionDesAlbums.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setResizable( false );
+		setTitle( "Gestion des Albums" );
+		setBounds( 100, 100, 424, 218 );
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
 		JPanel panel = new JPanel();
-		frmGestionDesAlbums.getContentPane().add( panel, BorderLayout.CENTER );
+		getContentPane().add( panel, BorderLayout.CENTER );
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 0, 44, 49, 0, 0, 0 };
 		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -151,7 +149,7 @@ public class Connexion extends JFrame {
 		panel.add( txtMDP, gbc_txtMDP );
 
 		JPanel panel_1 = new JPanel();
-		frmGestionDesAlbums.getContentPane().add( panel_1, BorderLayout.SOUTH );
+		getContentPane().add( panel_1, BorderLayout.SOUTH );
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panel_1.rowHeights = new int[] { 0, 0 };

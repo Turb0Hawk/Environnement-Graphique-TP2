@@ -26,7 +26,7 @@ public class Menu extends JFrame {
 	 * Create the application.
 	 */
 	public Menu() {
-		setResizable(false);
+		setResizable( false );
 		setTitle( "Gestion des Albums" );
 		event = new GestionnaireEvent( this );
 		initialize();
