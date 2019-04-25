@@ -4,11 +4,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
 import vue.Menu;
@@ -86,5 +91,16 @@ public class Controleur {
 	        System.err.println("Couldn't find file: " + path);
 	        return null;
 	    }
+	}
+
+	public void obtenirImage(JFrame parent) {
+		JFileChooser imageChooser = new JFileChooser();
+		imageChooser.setFileFilter( new FileNameExtensionFilter("Images (*.png, *.bmp)", "jpg", "png", "bmp") );
+		if(imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION){
+			if(imageChooser.getSelectedFile().exists()){
+				//TODO finir sa
+			}
+		}
+		
 	}
 }

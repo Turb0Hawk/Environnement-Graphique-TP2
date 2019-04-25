@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -73,6 +74,9 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			}
 			if(e.getSource() == artistes.getBtnNouveau()) {
 				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
+			}
+			if(e.getSource() == artistes.getBtnRemplacer()) {
+				control.obtenirImage(artistes);
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
