@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -12,11 +11,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.JTextField;
-
+import javax.swing.UIManager;
 import controleur.*;
-
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class Connexion extends JFrame {
 
@@ -49,6 +48,15 @@ public class Connexion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main( String[] args ) {
+		try {
+			for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()) {
+				if("Windows".equals( info.getName() )) {
+					UIManager.setLookAndFeel( info.getClassName() );
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		EventQueue.invokeLater( new Runnable() {
 			public void run() {
 				try {
