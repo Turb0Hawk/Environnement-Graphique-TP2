@@ -1,6 +1,5 @@
 package vue;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controleur.GestionnaireEvent;
@@ -22,22 +21,6 @@ public class Menu extends JFrame {
 	private JButton btnAlbums;
 	private JButton btnQuitter;
 	private JButton btnArtistes;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					Menu window = new Menu();
-					window.setVisible( true );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
-	}
 
 	/**
 	 * Create the application.

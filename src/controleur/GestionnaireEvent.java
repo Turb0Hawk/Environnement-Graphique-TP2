@@ -26,18 +26,18 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
-				if ( true ) {
+				if ( true ) { //TODO changer la condition
 
 					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
 							"Connexion à l'application", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
-						case JOptionPane.OK_OPTION:
-							conn.setVisible( false );
-							conn.dispose();
-							new Menu().setVisible( true );
-							break;
-	
-						default:
-							break;
+					case JOptionPane.OK_OPTION:
+						conn.setVisible( false );
+						conn.dispose();
+						new Menu().setVisible( true );
+						break;
+
+					default:
+						break;
 					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
@@ -50,7 +50,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
-			
+
 			if ( e.getSource() == menu.getBtnQuitter() ) {
 				System.exit( 0 );
 			}
@@ -94,10 +94,13 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
+
 		} else if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artistes = (GestionArtistes) frame;
+
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
+
 		}
 	}
 

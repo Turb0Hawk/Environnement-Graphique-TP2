@@ -68,26 +68,8 @@ public class GestionAlbums extends JFrame {
 	}
 
 	/**
-	 * Launch the application. TODO à deleter.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					GestionAlbums frame = new GestionAlbums();
-					frame.setVisible( true );
-					//event = new GestionnaireEvent( frame, event.ALBUM );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GestionAlbums() {
 		event = new GestionnaireEvent(this);
