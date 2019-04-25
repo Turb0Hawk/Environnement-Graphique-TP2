@@ -42,33 +42,6 @@ public class GestionAlbums extends JFrame {
 	public JButton getBtnRecherche() {
 		return btnRecherche;
 	}
-<<<<<<< HEAD
-
-	public JButton getBtnQuitter() {
-		return btnQuitter;
-	}
-
-	public JButton getBtnNouveau() {
-		return btnNouveau;
-	}
-
-	public JButton getBtnAjouter() {
-		return btnAjouter;
-	}
-
-	public JButton getBtnModifier() {
-		return btnModifier;
-	}
-
-	public JButton getBtnRemplacer() {
-		return btnRemplacer;
-	}
-
-	public JButton getBtnSupprimer() {
-		return btnSupprimer;
-	}
-=======
->>>>>>> 630e19ce9a4b6ab2f648c8bc0f379762d6ed010c
 
 	public JButton getBtnQuitter() {
 		return btnQuitter;
@@ -149,11 +122,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
-<<<<<<< HEAD
-		btnQuitter = new JButton("Retour au menu");
-=======
 		JButton btnQuitter = new JButton("Retour");
->>>>>>> 630e19ce9a4b6ab2f648c8bc0f379762d6ed010c
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
