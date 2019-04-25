@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import controleur.GestionnaireEvent;
+import controleur.controleur;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -35,6 +38,16 @@ public class GestionArtistes extends JFrame {
 	private JButton btnRemplacer;
 	private JButton btnSupprimer;
 	private GestionnaireEvent event;
+	private DefaultTableModel tabArtiste;
+	private controleur control = new controleur();
+	
+	public TableModel getTabModel() {
+		return tabArtiste;
+	}
+	
+	public void setTableModel(DefaultTableModel tab) {
+		 tabArtiste = tab;
+	}
 	
 	public JButton getBtnRecherche() {
 		return btnRecherche;
@@ -119,7 +132,7 @@ public class GestionArtistes extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
-		JButton btnQuitter = new JButton("Retour");
+		btnQuitter = new JButton("Retour");
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
@@ -301,6 +314,8 @@ public class GestionArtistes extends JFrame {
 		btnRecherche.addActionListener( event );
 		btnRemplacer.addActionListener( event );
 		btnSupprimer.addActionListener( event );
+		control.initialiserArtistes(tabArtiste);
+		tableArtistes.setModel( tabArtiste );
 	}
 
 }
