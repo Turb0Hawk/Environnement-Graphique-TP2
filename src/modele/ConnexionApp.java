@@ -15,17 +15,16 @@ public class ConnexionApp {
 	public Connection conn = null;
 	
 	public ConnexionApp() {
-		
-		
-	}
-	
-	private void connUp() {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 			
 		} catch ( ClassNotFoundException e1  ) {
 			e1.printStackTrace();
 		}
+	}
+	
+	private void connUp() {
+		
 		try {
 			conn = DriverManager.getConnection(urlConnection, user, password);
 		} catch ( SQLException e ) {
