@@ -73,6 +73,9 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.dispose();
 				new Menu().setVisible( true );
 			}
+			if(e.getSource() == artistes.getBtnNouveau()) {
+				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
+			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
 		}

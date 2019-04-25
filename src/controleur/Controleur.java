@@ -29,8 +29,8 @@ public class Controleur {
 
 	public DefaultTableModel initialiserArtistes( DefaultTableModel tabArtistes ) {
 		ImageIcon image;
-		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "not member");
-		ImageIcon imageTrue =  createImageIcon("/Ressources/iconTrue.png", "is member" );
+		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non");
+		ImageIcon imageTrue =  createImageIcon("/Ressources/iconTrue.png", "oui" );
 		tabArtistes = modele.getArtistes();
 		for ( int i = 0; i < tabArtistes.getRowCount(); ++i ) {
 
