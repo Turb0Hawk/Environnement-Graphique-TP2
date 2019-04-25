@@ -15,6 +15,7 @@ import vue.*;
 public class GestionnaireEvent implements ActionListener, DocumentListener, MouseListener {
 
 	private JFrame frame;
+	private Controleur control = new Controleur();
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
