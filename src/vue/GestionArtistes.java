@@ -16,11 +16,15 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.Toolkit;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class GestionArtistes extends JFrame {
 
@@ -40,6 +44,7 @@ public class GestionArtistes extends JFrame {
 	private GestionnaireEvent event;
 	private DefaultTableModel tabArtiste;
 	private controleur control = new controleur();
+	private JScrollPane scrollPane;
 	
 	public TableModel getTabModel() {
 		return tabArtiste;
@@ -88,7 +93,7 @@ public class GestionArtistes extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionArtistes.class.getResource("/Ressources/icon.png")));
 		setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		setBounds( 100, 100, 613, 442 );
+		setBounds( 100, 100, 641, 485 );
 		contentPane = new JPanel();
 		contentPane.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
 		contentPane.setLayout( new BorderLayout( 0, 0 ) );
@@ -97,9 +102,9 @@ public class GestionArtistes extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{89, 50, 0, 75, 79, 71, 50, 0, 0};
+		gbl_panel.columnWidths = new int[]{82, 50, 0, 79, 71, 50, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
@@ -116,7 +121,7 @@ public class GestionArtistes extends JFrame {
 		txtArtiste = new JTextField();
 		txtArtiste.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_txtArtiste = new GridBagConstraints();
-		gbc_txtArtiste.gridwidth = 5;
+		gbc_txtArtiste.gridwidth = 4;
 		gbc_txtArtiste.insets = new Insets(0, 25, 5, 5);
 		gbc_txtArtiste.fill = GridBagConstraints.BOTH;
 		gbc_txtArtiste.gridx = 0;
@@ -128,7 +133,7 @@ public class GestionArtistes extends JFrame {
 		btnRecherche.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnRecherche = new GridBagConstraints();
 		gbc_btnRecherche.insets = new Insets(0, 0, 5, 5);
-		gbc_btnRecherche.gridx = 5;
+		gbc_btnRecherche.gridx = 4;
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
@@ -137,7 +142,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnQuitter.insets = new Insets(0, 0, 5, 10);
-		gbc_btnQuitter.gridx = 7;
+		gbc_btnQuitter.gridx = 6;
 		gbc_btnQuitter.gridy = 1;
 		panel.add(btnQuitter, gbc_btnQuitter);
 		
@@ -161,23 +166,31 @@ public class GestionArtistes extends JFrame {
 		gbc_panel_1.gridy = 3;
 		panel.add(panel_1, gbc_panel_1);
 		
-		tableArtistes = new JTable();
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridheight = 4;
+		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.gridx = 2;
+		gbc_scrollPane.gridy = 3;
+		panel.add(scrollPane, gbc_scrollPane);
+		tabArtiste = control.initialiserArtistes(tabArtiste);
+		tableArtistes = new JTable(tabArtiste){
+		      public Class getColumnClass(int column) {
+		          return (column == 2) ? ImageIcon.class : Object.class;
+		        }
+		      };
+		scrollPane.setViewportView(tableArtistes);
 		tableArtistes.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		GridBagConstraints gbc_tableArtistes = new GridBagConstraints();
-		gbc_tableArtistes.gridheight = 4;
-		gbc_tableArtistes.gridwidth = 5;
-		gbc_tableArtistes.insets = new Insets(0, 0, 5, 25);
-		gbc_tableArtistes.fill = GridBagConstraints.BOTH;
-		gbc_tableArtistes.gridx = 2;
-		gbc_tableArtistes.gridy = 3;
-		panel.add(tableArtistes, gbc_tableArtistes);
+
 		
 		btnNouveau = new JButton("Nouveau");
 		btnNouveau.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnNouveau = new GridBagConstraints();
 		gbc_btnNouveau.fill = GridBagConstraints.BOTH;
 		gbc_btnNouveau.insets = new Insets(0, 0, 5, 10);
-		gbc_btnNouveau.gridx = 7;
+		gbc_btnNouveau.gridx = 6;
 		gbc_btnNouveau.gridy = 3;
 		panel.add(btnNouveau, gbc_btnNouveau);
 		
@@ -186,7 +199,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
 		gbc_btnAjouter.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAjouter.insets = new Insets(0, 0, 5, 10);
-		gbc_btnAjouter.gridx = 7;
+		gbc_btnAjouter.gridx = 6;
 		gbc_btnAjouter.gridy = 4;
 		panel.add(btnAjouter, gbc_btnAjouter);
 		
@@ -195,7 +208,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
 		gbc_btnModifier.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnModifier.insets = new Insets(0, 0, 5, 10);
-		gbc_btnModifier.gridx = 7;
+		gbc_btnModifier.gridx = 6;
 		gbc_btnModifier.gridy = 5;
 		panel.add(btnModifier, gbc_btnModifier);
 		
@@ -214,7 +227,7 @@ public class GestionArtistes extends JFrame {
 		GridBagConstraints gbc_btnSupprimer = new GridBagConstraints();
 		gbc_btnSupprimer.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSupprimer.insets = new Insets(0, 0, 5, 10);
-		gbc_btnSupprimer.gridx = 7;
+		gbc_btnSupprimer.gridx = 6;
 		gbc_btnSupprimer.gridy = 6;
 		panel.add(btnSupprimer, gbc_btnSupprimer);
 		
@@ -240,7 +253,7 @@ public class GestionArtistes extends JFrame {
 		txtNumero = new JTextField();
 		txtNumero.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_txtNumero = new GridBagConstraints();
-		gbc_txtNumero.gridwidth = 3;
+		gbc_txtNumero.gridwidth = 2;
 		gbc_txtNumero.insets = new Insets(0, 0, 5, 10);
 		gbc_txtNumero.fill = GridBagConstraints.BOTH;
 		gbc_txtNumero.gridx = 1;
@@ -255,7 +268,7 @@ public class GestionArtistes extends JFrame {
 		gbc_listArtiste.gridheight = 3;
 		gbc_listArtiste.insets = new Insets(0, 0, 25, 5);
 		gbc_listArtiste.fill = GridBagConstraints.BOTH;
-		gbc_listArtiste.gridx = 4;
+		gbc_listArtiste.gridx = 3;
 		gbc_listArtiste.gridy = 8;
 		panel.add(listArtiste, gbc_listArtiste);
 		
@@ -265,7 +278,7 @@ public class GestionArtistes extends JFrame {
 		gbc_panel_2.gridwidth = 2;
 		gbc_panel_2.insets = new Insets(0, 5, 25, 10);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_2.gridx = 6;
+		gbc_panel_2.gridx = 5;
 		gbc_panel_2.gridy = 8;
 		panel.add(panel_2, gbc_panel_2);
 		
@@ -281,7 +294,7 @@ public class GestionArtistes extends JFrame {
 		txtNom = new JTextField();
 		txtNom.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_txtNom = new GridBagConstraints();
-		gbc_txtNom.gridwidth = 3;
+		gbc_txtNom.gridwidth = 2;
 		gbc_txtNom.insets = new Insets(0, 0, 5, 10);
 		gbc_txtNom.fill = GridBagConstraints.BOTH;
 		gbc_txtNom.gridx = 1;
@@ -314,8 +327,6 @@ public class GestionArtistes extends JFrame {
 		btnRecherche.addActionListener( event );
 		btnRemplacer.addActionListener( event );
 		btnSupprimer.addActionListener( event );
-		control.initialiserArtistes(tabArtiste);
-		tableArtistes.setModel( tabArtiste );
 	}
 
 }
