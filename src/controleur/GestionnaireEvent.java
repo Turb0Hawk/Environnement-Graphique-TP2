@@ -8,14 +8,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import modele.*;
-import vue.Connexion;
-import vue.GestionAlbums;
-import vue.GestionArtistes;
-import vue.Menu;
+import vue.*;
 
 public class GestionnaireEvent implements ActionListener, DocumentListener {
 
-	private JFrame frame = null;
+	private JFrame frame;
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
@@ -26,13 +23,13 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
-				if ( true ) { //TODO changer la condition
+				if ( true ) { // TODO changer la condition
 
 					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
-							"Connexion à l'application", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
-					case JOptionPane.OK_OPTION:
-						conn.setVisible( false );
-						conn.dispose();
+							"Connexion à l'application", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
+					case JOptionPane.YES_OPTION:
+
+						frame.dispose();
 						new Menu().setVisible( true );
 						break;
 

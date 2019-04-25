@@ -119,7 +119,7 @@ public class GestionArtistes extends JFrame {
 		gbc_btnRecherche.gridy = 1;
 		panel.add(btnRecherche, gbc_btnRecherche);
 		
-		JButton btnQuitter = new JButton("Retour");
+		btnQuitter = new JButton("Retour");
 		btnQuitter.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
