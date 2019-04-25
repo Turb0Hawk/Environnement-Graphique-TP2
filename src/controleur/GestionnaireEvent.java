@@ -6,41 +6,63 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
+import modele.*;
 import vue.Connexion;
+import vue.GestionAlbums;
+import vue.GestionArtistes;
+import vue.Menu;
 
 public class GestionnaireEvent implements ActionListener, DocumentListener {
 
-	private Connexion pageConn;
+	private JFrame frame = null;
 
 	public GestionnaireEvent( JFrame frame ) {
-		pageConn = (Connexion) frame;
+		this.frame = frame;
 	}
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		if ( e.getSource() == pageConn.getBtnValider() ) {
-			if ( false ) {
-				// TODO faire la methode dans le modele pour vérifier  le mdp et username
-			} else {
-				JOptionPane.showMessageDialog( pageConn,
-						"Le mot de passe ou le nom d'utilisateur entrés sont incorrects.", "Mauvais identifiants",
-						JOptionPane.ERROR_MESSAGE );
+		if ( frame instanceof Connexion ) {
+			Connexion conn = (Connexion) frame;
+			if ( e.getSource() == conn.getBtnValider() ) {
+				if ( false ) {
+					// TODO faire la methode dans le modele pour vérifier le mdp
+					// et username
+				} else {
+					JOptionPane.showMessageDialog( conn,
+							"Le mot de passe ou le nom d'utilisateur entrés sont incorrects.", "Mauvais identifiants",
+							JOptionPane.ERROR_MESSAGE );
+				}
+
+			} else if ( e.getSource() == conn.getBtnQuitter() ) {
+				System.exit( 0 );
 			}
-			
-		} else if ( e.getSource() == pageConn.getBtnQuitter() ) {
-			System.exit( 0 );
-		}
+		} else if ( frame instanceof Menu ) {
+			Menu menu = (Menu)frame;
+		} else if ( frame instanceof GestionArtistes ) {
+			GestionArtistes artistes = (GestionArtistes)frame;
+		} else if ( frame instanceof GestionAlbums ) {
+			GestionAlbums album = (GestionAlbums)frame;
+		} 
 
 	}
 
 	@Override
 	public void changedUpdate( DocumentEvent e ) {
-		if ( e.getDocument() == pageConn.getTxtUser().getDocument() ) {
+		if ( frame instanceof Connexion ) {
+			Connexion conn = (Connexion) frame;
+			if ( e.getDocument() == conn.getTxtUser().getDocument() ) {
 
-		} else if ( e.getDocument() == pageConn.getTxtMDP().getDocument() ) {
-			// TODO event champ texte mot de passe
-		}
+			} else if ( e.getDocument() == conn.getTxtMDP().getDocument() ) {
+				// TODO event champ texte mot de passe
+			}
+		} else if ( frame instanceof Menu ) {
+			Menu menu = (Menu)frame;
+		} else if ( frame instanceof GestionArtistes ) {
+			GestionArtistes artistes = (GestionArtistes)frame;
+		} else if ( frame instanceof GestionAlbums ) {
+			GestionAlbums album = (GestionAlbums)frame;
+		} 
 	}
 
 	@Override
