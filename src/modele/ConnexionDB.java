@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class ConnexionDB {
 
 	private static final String user = "BiblioAdmin";
-	private static final String password = "test1";
+	private static final String password = "MusiqueAdmin";
 	private static final String urlConnection = "jdbc:mysql://localhost/BibliothequeDeMusique?user=" + user
 			+ "&password=" + password + "&serverTimezone=UTC";
 
