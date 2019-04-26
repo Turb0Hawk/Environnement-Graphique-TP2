@@ -97,6 +97,14 @@ public class GestionArtistes extends JFrame {
 	public JList<String> getListAlbum() {
 		return listArtiste;
 	}
+	
+	public JPanel getPanelArtiste() {
+		return panel_1;
+	}
+	
+	public JPanel getPanelAlbum() {
+		return panel_2;
+	}
 
 	/**
 	 * Create the frame.
@@ -355,6 +363,7 @@ public class GestionArtistes extends JFrame {
 		if ( donneesArtiste[3] != null ) {
 			panel_1.removeAll();
 			panel_1.add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
+			panel_1.repaint();
 		} else {
 			// metttre photo no images
 		}

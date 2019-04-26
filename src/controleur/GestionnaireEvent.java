@@ -22,6 +22,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 
 	private JFrame frame;
 	private Controleur control = new Controleur();
+	private ConnexionDB modele = new ConnexionDB();
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
@@ -77,7 +78,8 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
 			}
 			if(e.getSource() == artistes.getBtnRemplacer()) {
-				control.obtenirImage(artistes);
+				modele.remplacerImage(new ImageIcon(control.obtenirImage(artistes)), artistes);
+				artistes.getPanelArtiste().repaint();
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;

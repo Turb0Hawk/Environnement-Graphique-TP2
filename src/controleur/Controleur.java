@@ -71,7 +71,7 @@ public class Controleur {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( photo );
 				BufferedImage bImage = ImageIO.read( bis );
-				couverture = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
+				couverture = modele.resiseImage( bImage, 50, 50 );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			}
@@ -83,8 +83,7 @@ public class Controleur {
 		java.net.URL imgURL = getClass().getResource( path );
 		if ( imgURL != null ) {
 			Image Image = null;
-			Image = Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ).getScaledInstance( 15, 15,
-					Image.SCALE_SMOOTH );
+			Image = modele.resiseImage(Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15, 15);
 			return new ImageIcon( Image, description );
 		} else {
 			System.err.println( "Couldn't find file: " + path );
@@ -92,21 +91,20 @@ public class Controleur {
 		}
 	}
 
-	public ImageIcon obtenirImage( JFrame parent ) {
+	public Image obtenirImage( JFrame parent ) {
 		JFileChooser imageChooser = new JFileChooser();
-		Image Image = null;
+		Image image = null;
 		imageChooser.setFileFilter( new FileNameExtensionFilter( "Images (*.png, *.bmp)", "jpg", "png", "bmp" ) );
 		if ( imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION ) {
 			if ( imageChooser.getSelectedFile().exists() ) {
 				try {
 
-					Image = ImageIO.read( imageChooser.getSelectedFile() ).getScaledInstance( 15, 15,
-							Image.SCALE_SMOOTH );
+					image = modele.resiseImage( ImageIO.read( imageChooser.getSelectedFile() ), 15, 15);
 				} catch ( IOException e ) {
 					e.printStackTrace();
 				}
 			}
 		}
-		return new ImageIcon( Image );
+		return image;
 	}
 }

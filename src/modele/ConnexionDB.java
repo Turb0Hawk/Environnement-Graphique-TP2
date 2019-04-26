@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.Image;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -9,7 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import vue.*;
 
 public class ConnexionDB {
 
@@ -121,7 +125,7 @@ public class ConnexionDB {
 			statement.setString( 1, String.valueOf( artisteId ) );
 			results = statement.executeQuery();
 			while ( results.next() ) {
-				String row =  results.getString( "Annee" ) + " - " + results.getString( "Titre" );
+				String row = results.getString( "Annee" ) + " - " + results.getString( "Titre" );
 				tabAlbums.addElement( row );
 			}
 		} catch ( SQLException e ) {
@@ -137,17 +141,28 @@ public class ConnexionDB {
 		PreparedStatement statement;
 		byte[] photo = null;
 		try {
-			statement = conn
-					.prepareStatement( "SELECT Couverture FROM Album WHERE Numero_Artiste_Principal = ?" );
+			statement = conn.prepareStatement( "SELECT Couverture FROM Album WHERE Numero_Artiste_Principal = ?" );
 			statement.setString( 1, String.valueOf( idAlbum ) );
 			results = statement.executeQuery();
 			while ( results.next() ) {
-				photo =  results.getBytes( "Couverture" );
+				photo = results.getBytes( "Couverture" );
 			}
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
 		connDown();
 		return photo;
+	}
+
+	public void remplacerImage( ImageIcon imageIcon, GestionArtistes artiste ) {
+		artiste.getPanelArtiste().removeAll();
+		artiste.getPanelArtiste().add( new JLabel(imageIcon) );
+		artiste.getPanelArtiste().repaint();
+		//TODO insérer l'image dans la db
+
+	}
+
+	public Image resiseImage( Image image, int i, int j ) {
+		return image.getScaledInstance( i, j, Image.SCALE_SMOOTH );
 	}
 }
