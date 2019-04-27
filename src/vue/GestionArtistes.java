@@ -109,6 +109,9 @@ public class GestionArtistes extends JFrame {
 		return panel_2;
 	}
 
+	public JButton getBtnAide() {
+		return btnAide;
+	}
 	/**
 	 * Create the frame.
 	 */

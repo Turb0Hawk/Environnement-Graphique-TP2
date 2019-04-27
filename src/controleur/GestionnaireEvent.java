@@ -1,11 +1,15 @@
 package controleur;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -105,12 +109,12 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 
 				}
 			}
-			if(e.getSource() == artistes.getBtnNouveau()) {
-				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
+			if(e.getSource() == artiste.getBtnNouveau()) {
+				artiste.nouvelArtiste(artiste.getTableArtistes().getRowCount()+1);
 			}
-			if(e.getSource() == artistes.getBtnRemplacer()) {
-				modele.remplacerImage(control.obtenirImage(artistes), artistes);
-				artistes.getPanelArtiste().repaint();
+			if(e.getSource() == artiste.getBtnRemplacer()) {
+				modele.remplacerImage(control.obtenirImage(artiste), artiste);
+				artiste.getPanelArtiste().repaint();
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
