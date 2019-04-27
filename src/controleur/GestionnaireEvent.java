@@ -1,21 +1,28 @@
 package controleur;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import modele.*;
+import sun.awt.image.ToolkitImage;
 import vue.*;
 
 public class GestionnaireEvent implements ActionListener, DocumentListener, MouseListener {
 
 	private JFrame frame;
 	private Controleur control = new Controleur();
+	private ConnexionDB modele = new ConnexionDB();
 
 	public GestionnaireEvent( JFrame frame ) {
 		this.frame = frame;
@@ -69,6 +76,10 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			}
 			if(e.getSource() == artistes.getBtnNouveau()) {
 				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
+			}
+			if(e.getSource() == artistes.getBtnRemplacer()) {
+				modele.remplacerImage(control.obtenirImage(artistes), artistes);
+				artistes.getPanelArtiste().repaint();
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
@@ -127,7 +138,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.setArtisteCourrant( row );
 			}
 			if ( e.getSource() == artistes.getListAlbum() ) {
-				ImageIcon img = control.obtenirUnAlbum( artistes.getListAlbum().getSelectedIndex()+1 );
+				Image img = control.obtenirUnAlbum( artistes.getListAlbum().getSelectedIndex()+1 );
 				artistes.setAlbumCourrant( img );
 			}
 		} else if ( frame instanceof GestionAlbums ) {

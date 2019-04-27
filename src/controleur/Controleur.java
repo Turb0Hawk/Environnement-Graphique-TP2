@@ -4,11 +4,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
 import vue.Menu;
@@ -23,8 +28,8 @@ public class Controleur {
 
 	public DefaultTableModel initialiserArtistes( DefaultTableModel tabArtistes ) {
 		ImageIcon image;
-		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non");
-		ImageIcon imageTrue =  createImageIcon("/Ressources/iconTrue.png", "oui" );
+		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non" );
+		ImageIcon imageTrue = createImageIcon( "/Ressources/iconTrue.png", "oui" );
 		tabArtistes = modele.getArtistes();
 		for ( int i = 0; i < tabArtistes.getRowCount(); ++i ) {
 
@@ -40,51 +45,66 @@ public class Controleur {
 
 		return tabArtistes;
 	}
-	
-	public Object[] obtenirUnArtiste(int idArtiste) {
+
+	public Object[] obtenirUnArtiste( int idArtiste ) {
 		Object[] row = modele.getArtiste( idArtiste );
 		if ( row[3] != null ) {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
 				BufferedImage bImage = ImageIO.read( bis );
-				row[3] = bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH );
+				row[3] = bImage.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return row;
 	}
-	
-	public DefaultListModel<String> obtenirAlbumsArtiste( int artisteId ) {
+
+	public DefaultListModel<Album> obtenirAlbumsArtiste( int artisteId ) {
 		return modele.getAlbums( artisteId );
 	}
-	
-	public ImageIcon obtenirUnAlbum(int idAlbum) {
+
+	public Image obtenirUnAlbum( int idAlbum ) {
 		byte[] photo = modele.getAlbum( idAlbum );
-		ImageIcon couverture = null;
-		if ( photo != null ) {//redo
+		Image couverture = null;
+		if ( photo != null ) {// redo
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( photo );
 				BufferedImage bImage = ImageIO.read( bis );
-			    couverture = new ImageIcon(bImage.getScaledInstance( 50, 50, Image.SCALE_SMOOTH ));
+				couverture = modele.resiseImage( bImage, 50, 50 );
 			} catch ( IOException e ) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return couverture;
 	}
-	
-	protected ImageIcon createImageIcon(String path,
-	                                           String description) {
-	    java.net.URL imgURL = getClass().getResource(path);
-	    if (imgURL != null) {
-	    	Image Image = null;
-	    	   Image = Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) )
-			.getScaledInstance( 15, 15, Image.SCALE_SMOOTH );
-	        return new ImageIcon(Image, description);
-	    } else {
-	        System.err.println("Couldn't find file: " + path);
-	        return null;
-	    }
+
+	protected ImageIcon createImageIcon( String path, String description ) {
+		java.net.URL imgURL = getClass().getResource( path );
+		if ( imgURL != null ) {
+			Image Image = null;
+			Image = modele.resiseImage(Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15, 15);
+			return new ImageIcon( Image, description );
+		} else {
+			System.err.println( "Couldn't find file: " + path );
+			return null;
+		}
+	}
+
+	public BufferedImage obtenirImage( JFrame parent ) {
+		JFileChooser imageChooser = new JFileChooser();
+		BufferedImage image = null;
+		imageChooser.setFileFilter( new FileNameExtensionFilter( "Images (*.png, *.bmp)", "jpg", "png", "bmp" ) );
+		if ( imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION ) {
+			if ( imageChooser.getSelectedFile().exists() ) {
+				try {
+
+					image = ImageIO.read( imageChooser.getSelectedFile() );
+				} catch ( IOException e ) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return image;
 	}
 }

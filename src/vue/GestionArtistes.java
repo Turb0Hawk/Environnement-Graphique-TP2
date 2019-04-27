@@ -7,12 +7,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import controleur.*;
+import modele.Album;
+
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +28,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class GestionArtistes extends JFrame {
 
@@ -44,8 +52,8 @@ public class GestionArtistes extends JFrame {
 	private JScrollPane scrollPane;
 	private JCheckBox chckbxMembre;
 	private JPanel panel_1;
-	private JList<String> listArtiste;
-	private DefaultListModel<String> tabAlbums;
+	private JList<Album> listArtiste;
+	private DefaultListModel<Album> tabAlbums;
 	private JPanel panel_2;
 
 	public TableModel getTabModel() {
@@ -88,8 +96,16 @@ public class GestionArtistes extends JFrame {
 		return tableArtistes;
 	}
 
-	public JList<String> getListAlbum() {
+	public JList<Album> getListAlbum() {
 		return listArtiste;
+	}
+	
+	public JPanel getPanelArtiste() {
+		return panel_1;
+	}
+	
+	public JPanel getPanelAlbum() {
+		return panel_2;
 	}
 
 	/**
@@ -272,7 +288,7 @@ public class GestionArtistes extends JFrame {
 		panel.add( txtNumero, gbc_txtNumero );
 		txtNumero.setColumns( 10 );
 
-		listArtiste = new JList<String>();
+		listArtiste = new JList<Album>();
 		listArtiste.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		listArtiste.addMouseListener( event );
 		GridBagConstraints gbc_listArtiste = new GridBagConstraints();
@@ -347,17 +363,22 @@ public class GestionArtistes extends JFrame {
 		txtNom.setText( (String) donneesArtiste[1] );
 		chckbxMembre.setSelected( (boolean) donneesArtiste[2] );
 		if ( donneesArtiste[3] != null ) {
-			BufferedImage bImage = (BufferedImage) donneesArtiste[3];
-			panel_1.add( new JLabel( new ImageIcon( bImage ) ) );
+			panel_1.removeAll();
+			panel_1.add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
+			panel_1.repaint();
 		} else {
 			// metttre photo no images
 		}
 		tabAlbums = control.obtenirAlbumsArtiste( Integer.parseInt( (String) donneesArtiste[0] ) );
+		listArtiste.setSelectedIndex( 1 );
 		listArtiste.setModel( tabAlbums );
 	}
 
-	public void setAlbumCourrant( ImageIcon img ) {
-		panel_2.add( new JLabel( img ) );
+	public void setAlbumCourrant( Image img ) {
+		panel_2.removeAll();
+		if ( img != null ) {
+			panel_2.add( new JLabel( new ImageIcon( img ) ) );
+		}
 	}
 
 	public void nouvelArtiste( int nb ) {
@@ -365,5 +386,7 @@ public class GestionArtistes extends JFrame {
 		txtNumero.setText( String.valueOf( nb ) );
 		txtNom.setText( "" );
 		tabAlbums.clear();
+		panel_1.removeAll();
+		panel_2.removeAll();
 	}
 }
