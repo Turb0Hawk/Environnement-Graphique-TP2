@@ -36,7 +36,7 @@ public class GestionArtistes extends JFrame {
 	private static final long serialVersionUID = 2L;
 	private JPanel contentPane;
 	private JTextField txtArtiste;
-	private JTable tableArtistes;
+		private JTable tableArtistes;
 	private JTextField txtNumero;
 	private JTextField txtNom;
 	private JButton btnRecherche;
@@ -64,6 +64,10 @@ public class GestionArtistes extends JFrame {
 	public void setTableModel( DefaultTableModel tab ) {
 		tabArtiste = tab;
 	}
+	
+	public JTextField getTxtArtiste() {
+			return txtArtiste;
+		}
 
 	public JButton getBtnRecherche() {
 		return btnRecherche;
@@ -371,7 +375,7 @@ public class GestionArtistes extends JFrame {
 			panel_1.add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
 			panel_1.repaint();
 		} else {
-			// metttre photo no images
+			// TODO metttre photo no images
 		}
 		tabAlbums = control.obtenirAlbumsArtiste( Integer.parseInt( (String) donneesArtiste[0] ) );
 		listArtiste.setSelectedIndex( 1 );
@@ -383,6 +387,7 @@ public class GestionArtistes extends JFrame {
 		if ( img != null ) {
 			panel_2.add( new JLabel( new ImageIcon( img ) ) );
 		}
+		panel_2.repaint();
 	}
 
 	public void nouvelArtiste( int nb ) {

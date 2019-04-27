@@ -53,8 +53,8 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
-							"Le mot de passe ou le nom d'utilisateur entr�s sont incorrects.", "Mauvais identifiants",
-							JOptionPane.ERROR_MESSAGE );
+							"Le mot de passe ou le nom d'utilisateur entr�s sont incorrects.",
+							"Mauvais identifiants", JOptionPane.ERROR_MESSAGE );
 				}
 
 			} else if ( e.getSource() == conn.getBtnQuitter() ) {
@@ -108,13 +108,14 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					System.out.println( msg );
 
 				}
-			}
-			if(e.getSource() == artiste.getBtnNouveau()) {
-				artiste.nouvelArtiste(artiste.getTableArtistes().getRowCount()+1);
-			}
-			if(e.getSource() == artiste.getBtnRemplacer()) {
-				modele.remplacerImage(control.obtenirImage(artiste), artiste);
+			} else if ( e.getSource() == artiste.getBtnNouveau() ) {
+				artiste.nouvelArtiste( artiste.getTabModel().getRowCount() + 1 );
+			} else if ( e.getSource() == artiste.getBtnRemplacer() ) {
+				modele.remplacerImage( control.obtenirImage( artiste ), artiste );
 				artiste.getPanelArtiste().repaint();
+			} else if ( e.getSource() == artiste.getBtnRecherche() ) {
+				artiste.getTableArtistes().setModel( control.ajouterImageMembre( modele
+						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -181,12 +182,16 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 		if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artistes = (GestionArtistes) frame;
 			if ( e.getSource() == artistes.getTableArtistes() ) {
-				Object[] row = control.obtenirUnArtiste( artistes.getTableArtistes().getSelectedRow()+1 );
+				Object[] row = control.obtenirUnArtiste( Integer.parseInt( (String) artistes.getTabModel()
+						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ) );
 				artistes.setArtisteCourrant( row );
-			}
-			if ( e.getSource() == artistes.getListAlbum() ) {
-				Image img = control.obtenirUnAlbum( artistes.getListAlbum().getSelectedIndex()+1 );
-				artistes.setAlbumCourrant( img );
+			} else if ( e.getSource() == artistes.getListAlbum() ) {
+				Image img = artistes.getListAlbum().getSelectedValue().getImg();
+				if ( img != null ) {
+					artistes.setAlbumCourrant( modele.resiseImage( img, 35, 35 ) );
+				}
+				artistes.getPanelAlbum().repaint();
+				// TODO fix le wierd bug de loading d'image
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;

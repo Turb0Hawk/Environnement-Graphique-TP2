@@ -27,10 +27,13 @@ public class Controleur {
 	}
 
 	public DefaultTableModel initialiserArtistes( DefaultTableModel tabArtistes ) {
+		return ajouterImageMembre( tabArtistes = modele.getArtistes() );
+	}
+
+	public DefaultTableModel ajouterImageMembre( DefaultTableModel tabArtistes ) {
 		ImageIcon image;
 		ImageIcon imageFalse = createImageIcon( "/Ressources/iconFalse.png", "non" );
 		ImageIcon imageTrue = createImageIcon( "/Ressources/iconTrue.png", "oui" );
-		tabArtistes = modele.getArtistes();
 		for ( int i = 0; i < tabArtistes.getRowCount(); ++i ) {
 
 			if ( (boolean) ( (Vector) tabArtistes.getDataVector().elementAt( i ) ).elementAt( 2 ) ) {
@@ -83,7 +86,8 @@ public class Controleur {
 		java.net.URL imgURL = getClass().getResource( path );
 		if ( imgURL != null ) {
 			Image Image = null;
-			Image = modele.resiseImage(Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15, 15);
+			Image = modele.resiseImage( Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15,
+					15 );
 			return new ImageIcon( Image, description );
 		} else {
 			System.err.println( "Couldn't find file: " + path );
