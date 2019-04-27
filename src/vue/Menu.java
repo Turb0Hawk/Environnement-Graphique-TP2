@@ -21,6 +21,7 @@ public class Menu extends JFrame {
 	private JButton btnAlbums;
 	private JButton btnQuitter;
 	private JButton btnArtistes;
+	private JButton btnAide;
 
 	/**
 	 * Create the application.
@@ -52,6 +53,14 @@ public class Menu extends JFrame {
 		gbc_horizontalStrut_1.gridx = 0;
 		gbc_horizontalStrut_1.gridy = 0;
 		getContentPane().add( horizontalStrut_1, gbc_horizontalStrut_1 );
+		
+		btnAide = new JButton("Aide en ligne");
+		btnAide.setFont(new Font("Times New Roman", Font.PLAIN, 11));
+		GridBagConstraints gbc_btnAide = new GridBagConstraints();
+		gbc_btnAide.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAide.gridx = 3;
+		gbc_btnAide.gridy = 1;
+		getContentPane().add(btnAide, gbc_btnAide);
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -118,5 +127,9 @@ public class Menu extends JFrame {
 
 	public JButton getBtnArtistes() {
 		return btnArtistes;
+	}
+	
+	public JButton getBtnAide() {
+		return btnAide;
 	}
 }

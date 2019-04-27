@@ -20,6 +20,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
+
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
@@ -44,31 +45,45 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 
 			} else if ( e.getSource() == conn.getBtnQuitter() ) {
 				System.exit( 0 );
+				
+			} else if ( e.getSource() == conn.getBtnAide() ) {
+				
+				//TODO afficher l'aide
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
 
 			if ( e.getSource() == menu.getBtnQuitter() ) {
 				System.exit( 0 );
-			}
-			if ( e.getSource() == menu.getBtnArtistes() ) {
+			} else if ( e.getSource() == menu.getBtnArtistes() ) {
 				menu.dispose();
 				new GestionArtistes().setVisible( true );
-			}
-			if ( e.getSource() == menu.getBtnAlbums() ) {
+			} else if ( e.getSource() == menu.getBtnAlbums() ) {
 				menu.dispose();
 				new GestionAlbums().setVisible( true );
+			} else if ( e.getSource() == menu.getBtnAide() ) {
+				
+				//TODO afficher l'aide
 			}
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes) frame;
-			if ( e.getSource() == artistes.getBtnQuitter() ) {
-				artistes.dispose();
+			GestionArtistes artiste = (GestionArtistes) frame;
+			if ( e.getSource() == artiste.getBtnQuitter() ) {
+				artiste.dispose();
 				new Menu().setVisible( true );
+			} else if ( e.getSource() == artiste.getBtnAide() ) {
+				
+				//TODO afficher l'aide
 			}
+			
 		} else if ( frame instanceof GestionAlbums ) {
+			
 			GestionAlbums album = (GestionAlbums) frame;
+			
+			if ( e.getSource() == album.getBtnAide() ) {
+				
+				//TODO afficher l'aide
+			}
 		}
-
 	}
 
 	@Override

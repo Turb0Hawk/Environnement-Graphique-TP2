@@ -21,27 +21,12 @@ import java.awt.Toolkit;
 public class Connexion extends JFrame {
 
 	private static final long serialVersionUID = 6L;
+
 	private JTextField txtUser;
-
-	public JTextField getTxtUser() {
-		return txtUser;
-	}
-
-	public JTextField getTxtMDP() {
-		return txtMDP;
-	}
-
-	public JButton getBtnValider() {
-		return btnValider;
-	}
-
-	public JButton getBtnQuitter() {
-		return btnQuitter;
-	}
-
 	private JTextField txtMDP;
 	private JButton btnValider;
 	private JButton btnQuitter;
+	private JButton btnAide;
 	private GestionnaireEvent event;
 
 	/**
@@ -72,8 +57,7 @@ public class Connexion extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage( Connexion.class.getResource( "/Ressources/icon.png" ) ) );
+		setIconImage( Toolkit.getDefaultToolkit().getImage( Connexion.class.getResource( "/Ressources/icon.png" ) ) );
 		setResizable( false );
 		setTitle( "Gestion des Albums" );
 		setBounds( 100, 100, 424, 218 );
@@ -82,29 +66,39 @@ public class Connexion extends JFrame {
 		JPanel panel = new JPanel();
 		getContentPane().add( panel, BorderLayout.CENTER );
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 44, 49, 0, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0 };
+		gbl_panel.columnWidths = new int[] { 0, 44, 49, 0, 210, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout( gbl_panel );
+
+		btnAide = new JButton( "Aide en ligne" );
+		btnAide.setFont( new Font( "Times New Roman", Font.PLAIN, 11 ) );
+		btnAide.addActionListener( event );
+		GridBagConstraints gbc_btnAide = new GridBagConstraints();
+		gbc_btnAide.anchor = GridBagConstraints.EAST;
+		gbc_btnAide.insets = new Insets( 5, 0, 0, 5 );
+		gbc_btnAide.gridx = 4;
+		gbc_btnAide.gridy = 0;
+		panel.add( btnAide, gbc_btnAide );
 
 		JLabel lblConnexion = new JLabel( "Connexion \u00E0 l'application" );
 		lblConnexion.setFont( new Font( "Times New Roman", Font.PLAIN, 22 ) );
 		GridBagConstraints gbc_lblConnexion = new GridBagConstraints();
 		gbc_lblConnexion.anchor = GridBagConstraints.WEST;
-		gbc_lblConnexion.insets = new Insets( 25, 25, 5, 0 );
+		gbc_lblConnexion.insets = new Insets( 0, 25, 5, 0 );
 		gbc_lblConnexion.gridwidth = 5;
 		gbc_lblConnexion.gridx = 0;
-		gbc_lblConnexion.gridy = 0;
+		gbc_lblConnexion.gridy = 1;
 		panel.add( lblConnexion, gbc_lblConnexion );
 
 		JLabel lblNomDutilisateur = new JLabel( "Nom d'utilisateur" );
 		lblNomDutilisateur.setFont( new Font( "Times New Roman", Font.PLAIN, 16 ) );
 		GridBagConstraints gbc_lblNomDutilisateur = new GridBagConstraints();
-		gbc_lblNomDutilisateur.insets = new Insets( 0, 0, 0, 5 );
+		gbc_lblNomDutilisateur.insets = new Insets( 0, 0, 5, 5 );
 		gbc_lblNomDutilisateur.anchor = GridBagConstraints.EAST;
 		gbc_lblNomDutilisateur.gridx = 2;
-		gbc_lblNomDutilisateur.gridy = 1;
+		gbc_lblNomDutilisateur.gridy = 2;
 		panel.add( lblNomDutilisateur, gbc_lblNomDutilisateur );
 
 		txtUser = new JTextField();
@@ -115,7 +109,7 @@ public class Connexion extends JFrame {
 		gbc_txtUser.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtUser.insets = new Insets( 10, 5, 5, 50 );
 		gbc_txtUser.gridx = 3;
-		gbc_txtUser.gridy = 1;
+		gbc_txtUser.gridy = 2;
 		panel.add( txtUser, gbc_txtUser );
 		txtUser.setColumns( 10 );
 
@@ -125,7 +119,7 @@ public class Connexion extends JFrame {
 		gbc_lblMotDePasse.insets = new Insets( 0, 0, 0, 5 );
 		gbc_lblMotDePasse.anchor = GridBagConstraints.WEST;
 		gbc_lblMotDePasse.gridx = 2;
-		gbc_lblMotDePasse.gridy = 2;
+		gbc_lblMotDePasse.gridy = 3;
 		panel.add( lblMotDePasse, gbc_lblMotDePasse );
 
 		txtMDP = new JPasswordField();
@@ -137,7 +131,7 @@ public class Connexion extends JFrame {
 		gbc_txtMDP.insets = new Insets( 0, 5, 0, 50 );
 		gbc_txtMDP.fill = GridBagConstraints.BOTH;
 		gbc_txtMDP.gridx = 3;
-		gbc_txtMDP.gridy = 2;
+		gbc_txtMDP.gridy = 3;
 		panel.add( txtMDP, gbc_txtMDP );
 
 		JPanel panel_1 = new JPanel();
@@ -150,7 +144,7 @@ public class Connexion extends JFrame {
 		panel_1.setLayout( gbl_panel_1 );
 
 		btnValider = new JButton( "Valider" );
-		btnValider.setEnabled(false);
+		btnValider.setEnabled( false );
 		btnValider.addActionListener( event );
 		btnValider.setFont( new Font( "Times New Roman", Font.PLAIN, 18 ) );
 		GridBagConstraints gbc_btnValider = new GridBagConstraints();
@@ -169,6 +163,26 @@ public class Connexion extends JFrame {
 		gbc_btnQuitter.gridx = 1;
 		gbc_btnQuitter.gridy = 0;
 		panel_1.add( btnQuitter, gbc_btnQuitter );
+	}
+
+	public JTextField getTxtUser() {
+		return txtUser;
+	}
+
+	public JTextField getTxtMDP() {
+		return txtMDP;
+	}
+
+	public JButton getBtnValider() {
+		return btnValider;
+	}
+
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+
+	public JButton getBtnAide() {
+		return btnAide;
 	}
 
 }
