@@ -57,7 +57,7 @@ public class Connexion extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setIconImage( Toolkit.getDefaultToolkit().getImage( Connexion.class.getResource( "/Ressources/icon.png" ) ) );
+		setIconImage( Toolkit.getDefaultToolkit().getImage( Connexion.class.getResource( "/ressources/icon.png" ) ) );
 		setResizable( false );
 		setTitle( "Gestion des Albums" );
 		setBounds( 100, 100, 424, 218 );

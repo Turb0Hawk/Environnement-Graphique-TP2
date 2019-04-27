@@ -1,7 +1,12 @@
 package controleur;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -45,10 +50,18 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 
 			} else if ( e.getSource() == conn.getBtnQuitter() ) {
 				System.exit( 0 );
-				
+
 			} else if ( e.getSource() == conn.getBtnAide() ) {
-				
-				//TODO afficher l'aide
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() ); //TODO finir le fichier d'aide (placeholder)
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
+
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
@@ -62,8 +75,15 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 				menu.dispose();
 				new GestionAlbums().setVisible( true );
 			} else if ( e.getSource() == menu.getBtnAide() ) {
-				
-				//TODO afficher l'aide
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
 			}
 		} else if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artiste = (GestionArtistes) frame;
@@ -71,17 +91,31 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 				artiste.dispose();
 				new Menu().setVisible( true );
 			} else if ( e.getSource() == artiste.getBtnAide() ) {
-				
-				//TODO afficher l'aide
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
 			}
-			
+
 		} else if ( frame instanceof GestionAlbums ) {
-			
+
 			GestionAlbums album = (GestionAlbums) frame;
-			
+
 			if ( e.getSource() == album.getBtnAide() ) {
-				
-				//TODO afficher l'aide
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
 			}
 		}
 	}

@@ -38,7 +38,7 @@ public class GestionAlbums extends JFrame {
 	private JButton btnSupprimer;
 	private JButton btnAide;
 	private GestionnaireEvent event;
-
+	
 	/**
 	 * Create the frame.
 	 */
