@@ -46,6 +46,7 @@ public class GestionArtistes extends JFrame {
 	private JButton btnModifier;
 	private JButton btnRemplacer;
 	private JButton btnSupprimer;
+	private JButton btnAide;
 	private GestionnaireEvent event;
 	private DefaultTableModel tabArtiste;
 	private Controleur control = new Controleur();

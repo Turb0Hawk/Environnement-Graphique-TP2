@@ -30,6 +30,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
+
 		if ( frame instanceof Connexion ) {
 			Connexion conn = (Connexion) frame;
 			if ( e.getSource() == conn.getBtnValider() ) {
@@ -54,25 +55,55 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 
 			} else if ( e.getSource() == conn.getBtnQuitter() ) {
 				System.exit( 0 );
+
+			} else if ( e.getSource() == conn.getBtnAide() ) {
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
+
 			}
 		} else if ( frame instanceof Menu ) {
 			Menu menu = (Menu) frame;
 			if ( e.getSource() == menu.getBtnQuitter() ) {
 				System.exit( 0 );
-			}
-			if ( e.getSource() == menu.getBtnArtistes() ) {
+			} else if ( e.getSource() == menu.getBtnArtistes() ) {
 				menu.dispose();
 				new GestionArtistes().setVisible( true );
-			}
-			if ( e.getSource() == menu.getBtnAlbums() ) {
+			} else if ( e.getSource() == menu.getBtnAlbums() ) {
 				menu.dispose();
 				new GestionAlbums().setVisible( true );
+			} else if ( e.getSource() == menu.getBtnAide() ) {
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
 			}
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes) frame;
-			if ( e.getSource() == artistes.getBtnQuitter() ) {
-				artistes.dispose();
+			GestionArtistes artiste = (GestionArtistes) frame;
+			if ( e.getSource() == artiste.getBtnQuitter() ) {
+				artiste.dispose();
 				new Menu().setVisible( true );
+			} else if ( e.getSource() == artiste.getBtnAide() ) {
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
 			}
 			if(e.getSource() == artistes.getBtnNouveau()) {
 				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
@@ -82,9 +113,21 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.getPanelArtiste().repaint();
 			}
 		} else if ( frame instanceof GestionAlbums ) {
-			GestionAlbums album = (GestionAlbums) frame;
-		}
 
+			GestionAlbums album = (GestionAlbums) frame;
+
+			if ( e.getSource() == album.getBtnAide() ) {
+
+				try {
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
+					Desktop.getDesktop().open( fileAide );
+
+				} catch ( IOException msg ) {
+					System.out.println( msg );
+
+				}
+			}
+		}
 	}
 
 	@Override
