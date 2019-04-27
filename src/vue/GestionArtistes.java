@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import controleur.*;
+import modele.Album;
+
 import java.awt.GridBagLayout;
 import java.awt.Image;
 
@@ -50,8 +52,8 @@ public class GestionArtistes extends JFrame {
 	private JScrollPane scrollPane;
 	private JCheckBox chckbxMembre;
 	private JPanel panel_1;
-	private JList<String> listArtiste;
-	private DefaultListModel<String> tabAlbums;
+	private JList<Album> listArtiste;
+	private DefaultListModel<Album> tabAlbums;
 	private JPanel panel_2;
 
 	public TableModel getTabModel() {
@@ -94,7 +96,7 @@ public class GestionArtistes extends JFrame {
 		return tableArtistes;
 	}
 
-	public JList<String> getListAlbum() {
+	public JList<Album> getListAlbum() {
 		return listArtiste;
 	}
 	
@@ -286,7 +288,7 @@ public class GestionArtistes extends JFrame {
 		panel.add( txtNumero, gbc_txtNumero );
 		txtNumero.setColumns( 10 );
 
-		listArtiste = new JList<String>();
+		listArtiste = new JList<Album>();
 		listArtiste.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		listArtiste.addMouseListener( event );
 		GridBagConstraints gbc_listArtiste = new GridBagConstraints();
@@ -368,6 +370,7 @@ public class GestionArtistes extends JFrame {
 			// metttre photo no images
 		}
 		tabAlbums = control.obtenirAlbumsArtiste( Integer.parseInt( (String) donneesArtiste[0] ) );
+		listArtiste.setSelectedIndex( 1 );
 		listArtiste.setModel( tabAlbums );
 	}
 

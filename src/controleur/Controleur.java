@@ -60,7 +60,7 @@ public class Controleur {
 		return row;
 	}
 
-	public DefaultListModel<String> obtenirAlbumsArtiste( int artisteId ) {
+	public DefaultListModel<Album> obtenirAlbumsArtiste( int artisteId ) {
 		return modele.getAlbums( artisteId );
 	}
 
@@ -91,15 +91,15 @@ public class Controleur {
 		}
 	}
 
-	public Image obtenirImage( JFrame parent ) {
+	public BufferedImage obtenirImage( JFrame parent ) {
 		JFileChooser imageChooser = new JFileChooser();
-		Image image = null;
+		BufferedImage image = null;
 		imageChooser.setFileFilter( new FileNameExtensionFilter( "Images (*.png, *.bmp)", "jpg", "png", "bmp" ) );
 		if ( imageChooser.showOpenDialog( parent ) == JFileChooser.APPROVE_OPTION ) {
 			if ( imageChooser.getSelectedFile().exists() ) {
 				try {
 
-					image = modele.resiseImage( ImageIO.read( imageChooser.getSelectedFile() ), 15, 15);
+					image = ImageIO.read( imageChooser.getSelectedFile() );
 				} catch ( IOException e ) {
 					e.printStackTrace();
 				}

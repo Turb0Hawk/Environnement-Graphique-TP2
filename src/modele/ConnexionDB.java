@@ -1,6 +1,9 @@
 package modele;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -9,10 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+
+import com.sun.xml.internal.messaging.saaj.util.Base64;
+
 import vue.*;
 
 public class ConnexionDB {
@@ -114,19 +122,21 @@ public class ConnexionDB {
 		return results;
 	}
 
-	public DefaultListModel<String> getAlbums( int artisteId ) {
+	public DefaultListModel<Album> getAlbums( int artisteId ) {
 		connUp();
 		ResultSet results = null;
 		PreparedStatement statement;
-		DefaultListModel<String> tabAlbums = new DefaultListModel<String>();
+		DefaultListModel<Album> tabAlbums = new DefaultListModel<Album>();
 		try {
 			statement = conn
 					.prepareStatement( "SELECT * FROM Album WHERE Numero_Artiste_Principal = ? ORDER BY Annee" );
 			statement.setString( 1, String.valueOf( artisteId ) );
 			results = statement.executeQuery();
 			while ( results.next() ) {
-				String row = results.getString( "Annee" ) + " - " + results.getString( "Titre" );
-				tabAlbums.addElement( row );
+				Album album = new Album( results.getInt( "Numero" ), results.getString( "Titre" ),
+						results.getString( "Genre" ), results.getInt( "Annee" ), results.getBytes( "Couverture" ),
+						results.getInt( "Numero_Artiste_Principal" ) );
+				tabAlbums.addElement( album );
 			}
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -154,15 +164,46 @@ public class ConnexionDB {
 		return photo;
 	}
 
-	public void remplacerImage( ImageIcon imageIcon, GestionArtistes artiste ) {
+	public void remplacerImage( BufferedImage image, GestionArtistes artiste ) {
+		byte[] photo = imageToByte( image );
 		artiste.getPanelArtiste().removeAll();
-		artiste.getPanelArtiste().add( new JLabel(imageIcon) );
+		artiste.getPanelArtiste().add( new JLabel( new ImageIcon( resiseImage( image, 35, 35 ) ) ) );
 		artiste.getPanelArtiste().repaint();
-		//TODO insérer l'image dans la db
+		// TODO insérer l'image dans la db
+		connUp();
+		PreparedStatement statement;
+
+		try {
+			statement = conn.prepareStatement( "UPDATE Artiste SET Photo = ? WHERE Numero = ?" );
+			statement.setBytes( 1, photo );
+			statement.setLong( 2, ( artiste.getTableArtistes().getSelectedRow() + 1 ) );
+			statement.executeUpdate();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
 
 	}
 
 	public Image resiseImage( Image image, int i, int j ) {
 		return image.getScaledInstance( i, j, Image.SCALE_SMOOTH );
+	}
+
+	public Image resiseImage( BufferedImage image, int i, int j ) {
+		return image.getScaledInstance( i, j, Image.SCALE_SMOOTH );
+	}
+
+	public static byte[] imageToByte( BufferedImage i ) {
+		// taken directly from :
+		// https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4848028
+		byte[] imageByte;
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write( i, "png", baos );
+			imageByte = baos.toByteArray();
+		} catch ( IOException ioe ) {
+			imageByte = null;
+		}
+		return imageByte;
 	}
 }

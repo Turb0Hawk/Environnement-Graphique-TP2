@@ -78,7 +78,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
 			}
 			if(e.getSource() == artistes.getBtnRemplacer()) {
-				modele.remplacerImage(new ImageIcon(control.obtenirImage(artistes)), artistes);
+				modele.remplacerImage(control.obtenirImage(artistes), artistes);
 				artistes.getPanelArtiste().repaint();
 			}
 		} else if ( frame instanceof GestionAlbums ) {
