@@ -54,7 +54,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener {
 			} else if ( e.getSource() == conn.getBtnAide() ) {
 
 				try {
-					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() ); //TODO finir le fichier d'aide (placeholder)
+					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
 					Desktop.getDesktop().open( fileAide );
 
 				} catch ( IOException msg ) {
