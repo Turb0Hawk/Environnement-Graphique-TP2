@@ -61,6 +61,7 @@ public class Menu extends JFrame {
 		gbc_btnAide.gridx = 3;
 		gbc_btnAide.gridy = 1;
 		getContentPane().add(btnAide, gbc_btnAide);
+		btnAide.addActionListener( event );
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();

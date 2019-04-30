@@ -121,11 +121,11 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artiste.getTableArtistes().setModel( control.ajouterImageMembre( modele
 						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
 			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
-				 control.ajouterArtiste(artiste);
-			} else if (e.getSource() == artiste.getBtnModifier()) {
-				
-			} else if(e.getSource() == artiste.getBtnSupprimer()) {
-				
+				control.ajouterArtiste( artiste );
+			} else if ( e.getSource() == artiste.getBtnModifier() ) {
+
+			} else if ( e.getSource() == artiste.getBtnSupprimer() ) {
+
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -163,21 +163,19 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					conn.getBtnValider().setEnabled( true );
 				}
 			}
-		} else if ( frame instanceof Menu ) {
-			Menu menu = (Menu) frame;
-
 		} else if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artiste = (GestionArtistes) frame;
 			if ( e.getDocument() == artiste.getTxtNumero().getDocument() ) {
-				artiste.getBtnAjouter().setEnabled( !artiste.getTxtNumero().getText().isEmpty() && ( Integer
-						.parseInt( artiste.getTxtNumero().getText() ) > Integer.parseInt( (String) ( artiste
-								.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) ) ) );
+				artiste.getBtnAjouter()
+						.setEnabled( !artiste.getTxtNumero().getText().isEmpty()
+								&& ( Integer.parseInt( artiste.getTxtNumero().getText() ) > Integer
+										.parseInt( (String) ( artiste.getTabModel()
+												.getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) ) ) );
 			}
 
-		} else if ( frame instanceof GestionAlbums ) {
+		} /*else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
-
-		}
+		}*/
 	}
 
 	@Override
@@ -199,7 +197,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			if ( e.getSource() == artistes.getTableArtistes() ) {
 				int ee = Integer.parseInt( (String) artistes.getTabModel()
 						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) );
-				Object[] row = control.obtenirUnArtiste(  ee, artistes );
+				Object[] row = control.obtenirUnArtiste( ee, artistes );
 				artistes.setArtisteCourrant( row );
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();
@@ -210,32 +208,28 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				artistes.getPanelAlbum().repaint();
 				// TODO fix le wierd bug de loading d'image
 			}
-		} else if ( frame instanceof GestionAlbums ) {
+		} /*else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
-		}
+		}*/
 	}
 
 	@Override
 	public void mouseEntered( MouseEvent e ) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited( MouseEvent e ) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed( MouseEvent e ) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased( MouseEvent e ) {
-		// TODO Auto-generated method stub
 
 	}
 

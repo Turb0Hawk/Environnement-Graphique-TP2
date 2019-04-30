@@ -71,10 +71,11 @@ public class GestionAlbums extends JFrame {
 		btnAide = new JButton( "Aide en ligne" );
 		btnAide.setFont( new Font( "Times New Roman", Font.PLAIN, 11 ) );
 		GridBagConstraints gbc_btnAide = new GridBagConstraints();
-		gbc_btnAide.insets = new Insets( 5, 0, 0, 0 );
+		gbc_btnAide.insets = new Insets(5, 0, 0, 5);
 		gbc_btnAide.gridx = 7;
 		gbc_btnAide.gridy = 0;
 		panel.add( btnAide, gbc_btnAide );
+		btnAide.addActionListener( event );
 
 		JLabel lblRechercherUnAlbum = new JLabel( "Rechercher un album" );
 		lblRechercherUnAlbum.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
@@ -105,7 +106,7 @@ public class GestionAlbums extends JFrame {
 		gbc_btnRecherche.gridy = 2;
 		panel.add( btnRecherche, gbc_btnRecherche );
 
-		JButton btnQuitter = new JButton( "Retour" );
+		btnQuitter = new JButton( "Retour" );
 		btnQuitter.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		GridBagConstraints gbc_btnQuitter = new GridBagConstraints();
 		gbc_btnQuitter.fill = GridBagConstraints.HORIZONTAL;
