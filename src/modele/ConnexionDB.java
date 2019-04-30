@@ -244,7 +244,6 @@ public class ConnexionDB {
 	public void ajoutArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
 		byte[] photoBytes = imageToByte( photo );
 		connUp();
-		ResultSet results = null;
 		PreparedStatement statement;
 		try {
 			statement = conn.prepareStatement( "INSERT INTO Artiste VALUES (?, ?, ?, ?);" );
@@ -257,5 +256,18 @@ public class ConnexionDB {
 			e.printStackTrace();
 		}
 		connDown();
+	}
+
+	public void deleteArtiste( int num ) {
+		connUp();
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement( "DELETE FROM Artiste WHERE Numero = ?" );
+			statement.setInt( 1, num );
+			statement.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();		
 	}
 }

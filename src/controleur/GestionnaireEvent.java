@@ -125,7 +125,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			} else if ( e.getSource() == artiste.getBtnModifier() ) {
 
 			} else if ( e.getSource() == artiste.getBtnSupprimer() ) {
-
+				control.supprimerArtiste(artiste);
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 

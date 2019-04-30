@@ -123,6 +123,15 @@ public class Controleur {
 		modele.ajoutArtiste(num, nom, membre, photo);
 		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
 		artiste.getTableArtistes().setRowSelectionInterval( num-1, num-1 );
+		artiste.repaint();
 		
+	}
+
+	public void supprimerArtiste( GestionArtistes artiste ) {
+		int num = Integer.parseInt(artiste.getTxtNumero().getText());
+		modele.deleteArtiste(num);
+		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
+		artiste.getTableArtistes().setRowSelectionInterval( num-1, num-1 );
+		artiste.repaint();
 	}
 }
