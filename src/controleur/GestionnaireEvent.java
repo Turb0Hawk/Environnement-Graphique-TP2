@@ -122,6 +122,10 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
 			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
 				 control.ajouterArtiste(artiste);
+			} else if (e.getSource() == artiste.getBtnModifier()) {
+				
+			} else if(e.getSource() == artiste.getBtnSupprimer()) {
+				
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -193,8 +197,9 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 		if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artistes = (GestionArtistes) frame;
 			if ( e.getSource() == artistes.getTableArtistes() ) {
-				Object[] row = control.obtenirUnArtiste( Integer.parseInt( (String) artistes.getTabModel()
-						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ), artistes );
+				int ee = Integer.parseInt( (String) artistes.getTabModel()
+						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) );
+				Object[] row = control.obtenirUnArtiste(  ee, artistes );
 				artistes.setArtisteCourrant( row );
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();

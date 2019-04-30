@@ -171,6 +171,7 @@ public class ConnexionDB {
 
 	public void remplacerImage( BufferedImage image, GestionArtistes artiste ) {
 		byte[] photo = imageToByte( image );
+		artiste.setImageArtiste( image );
 		artiste.getPanelArtiste().removeAll();
 		artiste.getPanelArtiste().add( new JLabel( new ImageIcon( resiseImage( image, 35, 35 ) ) ) );
 		artiste.getPanelArtiste().repaint();
@@ -181,8 +182,8 @@ public class ConnexionDB {
 		try {
 			statement = conn.prepareStatement( "UPDATE Artiste SET Photo = ? WHERE Numero = ?" );
 			statement.setBytes( 1, photo );
-			statement.setLong( 2,
-					( (int) artiste.getTabModel().getValueAt( artiste.getTableArtistes().getSelectedRow(), 0 ) ) );
+			statement.setLong( 2, ( Integer.parseInt(
+					(String) artiste.getTabModel().getValueAt( artiste.getTableArtistes().getSelectedRow(), 0 ) ) ) );
 			statement.executeUpdate();
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -209,7 +210,7 @@ public class ConnexionDB {
 			imageByte = baos.toByteArray();
 		} catch ( IOException ioe ) {
 			imageByte = null;
-		}catch (IllegalArgumentException iae) {
+		} catch ( IllegalArgumentException iae ) {
 			imageByte = null;
 		}
 		return imageByte;
@@ -250,7 +251,7 @@ public class ConnexionDB {
 			statement.setInt( 1, num );
 			statement.setString( 2, nom );
 			statement.setBoolean( 3, membre );
-			statement.setBytes(4, photoBytes);
+			statement.setBytes( 4, photoBytes );
 			statement.execute();
 		} catch ( SQLException e ) {
 			e.printStackTrace();

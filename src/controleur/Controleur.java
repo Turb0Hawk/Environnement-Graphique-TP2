@@ -57,8 +57,8 @@ public class Controleur {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
 				BufferedImage bImage = ImageIO.read( bis );
-				row[3] = bImage.getScaledInstance( 150,
-						150, Image.SCALE_SMOOTH );
+				row[3] = bImage.getScaledInstance( 75,
+						75, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			}
@@ -119,15 +119,10 @@ public class Controleur {
 		int num = Integer.parseInt(artiste.getTxtNumero().getText());
 		String nom = artiste.getTxtNom().getText();
 		boolean membre = artiste.getMembre().isSelected();
-		BufferedImage photo ;
-		try {
-			photo = (BufferedImage) ((ImageIcon) ((JLabel)artiste.getPanelArtiste().getComponents()[0]).getIcon()).getImage();
-		} catch ( ArrayIndexOutOfBoundsException e ) {
-			photo = null;
-		}
+		BufferedImage photo = artiste.getImageArtiste();
 		modele.ajoutArtiste(num, nom, membre, photo);
-		artiste.getTableArtistes().setModel( initialiserArtistes( new DefaultTableModel() ) );
-		artiste.getTableArtistes().setRowSelectionInterval( num, num );
+		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
+		artiste.getTableArtistes().setRowSelectionInterval( num-1, num-1 );
 		
 	}
 }

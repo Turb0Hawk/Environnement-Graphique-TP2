@@ -57,13 +57,23 @@ public class GestionArtistes extends JFrame {
 	private JList<Album> listArtiste;
 	private DefaultListModel<Album> tabAlbums;
 	private JPanel panel_2;
+	private BufferedImage imgArtiste = null;
 
-	public TableModel getTabModel() {
+	public DefaultTableModel getTabModel() {
 		return tabArtiste;
 	}
 
 	public void setTableModel( DefaultTableModel tab ) {
 		tabArtiste = tab;
+	}
+	
+	public void setImageArtiste( BufferedImage image ) {
+		imgArtiste = image;
+		
+	}
+	
+	public BufferedImage getImageArtiste() {
+		return imgArtiste;
 	}
 	
 	public JTextField getTxtArtiste() {
@@ -416,4 +426,5 @@ public class GestionArtistes extends JFrame {
 		panel_1.removeAll();
 		panel_2.removeAll();
 	}
+
 }
