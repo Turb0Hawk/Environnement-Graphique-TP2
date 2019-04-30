@@ -73,7 +73,7 @@ public class ConnexionDB {
 		tabArtistes.addColumn( "Membre" );
 		try {
 			statement = conn.createStatement();
-			statement.execute( "SELECT * FROM Artiste" );
+			statement.execute( "SELECT * FROM Artiste ORDER BY Numero ASC" );
 			results = statement.getResultSet();
 			while ( results.next() ) {
 				Object[] row = { results.getString( "Numero" ), results.getString( "Nom_Artiste" ),
@@ -209,6 +209,8 @@ public class ConnexionDB {
 			imageByte = baos.toByteArray();
 		} catch ( IOException ioe ) {
 			imageByte = null;
+		}catch (IllegalArgumentException iae) {
+			imageByte = null;
 		}
 		return imageByte;
 	}
@@ -236,5 +238,23 @@ public class ConnexionDB {
 		}
 		connDown();
 		return tabArtistes;
+	}
+
+	public void ajoutArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
+		byte[] photoBytes = imageToByte( photo );
+		connUp();
+		ResultSet results = null;
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement( "INSERT INTO Artiste VALUES (?, ?, ?, ?);" );
+			statement.setInt( 1, num );
+			statement.setString( 2, nom );
+			statement.setBoolean( 3, membre );
+			statement.setBytes(4, photoBytes);
+			statement.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
 	}
 }

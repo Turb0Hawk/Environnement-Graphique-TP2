@@ -30,13 +30,14 @@ import javax.swing.JScrollPane;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import javax.swing.ListSelectionModel;
 
 public class GestionArtistes extends JFrame {
 
 	private static final long serialVersionUID = 2L;
 	private JPanel contentPane;
 	private JTextField txtArtiste;
-		private JTable tableArtistes;
+	private JTable tableArtistes;
 	private JTextField txtNumero;
 	private JTextField txtNom;
 	private JButton btnRecherche;
@@ -66,8 +67,20 @@ public class GestionArtistes extends JFrame {
 	}
 	
 	public JTextField getTxtArtiste() {
-			return txtArtiste;
-		}
+		return txtArtiste;
+	}
+	
+	public JTextField getTxtNom() {
+		return txtNom;
+	}
+	
+	public JCheckBox getMembre() {
+		return chckbxMembre;
+	}
+	
+	public JTextField getTxtNumero() {
+		return txtNumero;
+	}
 
 	public JButton getBtnRecherche() {
 		return btnRecherche;
@@ -119,7 +132,6 @@ public class GestionArtistes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("rawtypes")
 	public GestionArtistes() {
 		event = new GestionnaireEvent( this );
 		setTitle( "Gestion des Albums" );
@@ -137,9 +149,9 @@ public class GestionArtistes extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add( panel, BorderLayout.CENTER );
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 82, 50, 0, 79, 71, 64, 81, 0 };
+		gbl_panel.columnWidths = new int[] { 82, 98, 0, 79, 71, 64, 81, 0 };
 		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		panel.setLayout( gbl_panel );
@@ -193,10 +205,10 @@ public class GestionArtistes extends JFrame {
 
 		panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridheight = 3;
 		gbc_panel_1.gridwidth = 2;
-		gbc_panel_1.insets = new Insets( 0, 25, 5, 25 );
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.insets = new Insets(0, 25, 5, 5);
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 3;
 		panel.add( panel_1, gbc_panel_1 );
@@ -216,6 +228,7 @@ public class GestionArtistes extends JFrame {
 				return ( column == 2 ) ? ImageIcon.class : Object.class;
 			}
 		};
+		tableArtistes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableArtistes.addMouseListener( event );
 		scrollPane.setViewportView( tableArtistes );
 		tableArtistes.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
@@ -230,6 +243,7 @@ public class GestionArtistes extends JFrame {
 		panel.add( btnNouveau, gbc_btnNouveau );
 
 		btnAjouter = new JButton( "Ajouter" );
+		btnAjouter.setEnabled(false);
 		btnAjouter.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
 		gbc_btnAjouter.fill = GridBagConstraints.HORIZONTAL;
@@ -295,8 +309,10 @@ public class GestionArtistes extends JFrame {
 		gbc_txtNumero.gridy = 8;
 		panel.add( txtNumero, gbc_txtNumero );
 		txtNumero.setColumns( 10 );
+		txtNumero.getDocument().addDocumentListener( event );
 
 		listArtiste = new JList<Album>();
+		listArtiste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listArtiste.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		listArtiste.addMouseListener( event );
 		GridBagConstraints gbc_listArtiste = new GridBagConstraints();
@@ -394,7 +410,9 @@ public class GestionArtistes extends JFrame {
 		chckbxMembre.setSelected( false );
 		txtNumero.setText( String.valueOf( nb ) );
 		txtNom.setText( "" );
-		tabAlbums.clear();
+		if ( !tabAlbums.isEmpty() ) {
+			tabAlbums.clear();
+		}
 		panel_1.removeAll();
 		panel_2.removeAll();
 	}

@@ -12,10 +12,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
+import vue.GestionArtistes;
 import vue.Menu;
 
 public class Controleur {
@@ -49,13 +51,14 @@ public class Controleur {
 		return tabArtistes;
 	}
 
-	public Object[] obtenirUnArtiste( int idArtiste ) {
+	public Object[] obtenirUnArtiste( int idArtiste, GestionArtistes artiste ) {
 		Object[] row = modele.getArtiste( idArtiste );
 		if ( row[3] != null ) {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
 				BufferedImage bImage = ImageIO.read( bis );
-				row[3] = bImage.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
+				row[3] = bImage.getScaledInstance( 150,
+						150, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			}
@@ -110,5 +113,21 @@ public class Controleur {
 			}
 		}
 		return image;
+	}
+
+	public void ajouterArtiste( GestionArtistes artiste ) {
+		int num = Integer.parseInt(artiste.getTxtNumero().getText());
+		String nom = artiste.getTxtNom().getText();
+		boolean membre = artiste.getMembre().isSelected();
+		BufferedImage photo ;
+		try {
+			photo = (BufferedImage) ((ImageIcon) ((JLabel)artiste.getPanelArtiste().getComponents()[0]).getIcon()).getImage();
+		} catch ( ArrayIndexOutOfBoundsException e ) {
+			photo = null;
+		}
+		modele.ajoutArtiste(num, nom, membre, photo);
+		artiste.getTableArtistes().setModel( initialiserArtistes( new DefaultTableModel() ) );
+		artiste.getTableArtistes().setRowSelectionInterval( num, num );
+		
 	}
 }

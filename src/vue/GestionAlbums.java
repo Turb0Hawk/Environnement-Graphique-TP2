@@ -19,6 +19,7 @@ import java.awt.Toolkit;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ListSelectionModel;
 
 public class GestionAlbums extends JFrame {
 
@@ -134,6 +135,7 @@ public class GestionAlbums extends JFrame {
 		panel.add( panel_1, gbc_panel_1 );
 
 		tableAlbums = new JTable();
+		tableAlbums.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableAlbums.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		GridBagConstraints gbc_tableAlbums = new GridBagConstraints();
 		gbc_tableAlbums.gridheight = 4;
@@ -221,6 +223,7 @@ public class GestionAlbums extends JFrame {
 		txtNumero.setColumns( 10 );
 
 		JList listAlbums = new JList();
+		listAlbums.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAlbums.setFont( new Font( "Times New Roman", Font.PLAIN, 14 ) );
 		GridBagConstraints gbc_listAlbums = new GridBagConstraints();
 		gbc_listAlbums.gridwidth = 2;

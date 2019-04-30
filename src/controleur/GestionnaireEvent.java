@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
 import modele.*;
 import sun.awt.image.ToolkitImage;
 import vue.*;
@@ -109,13 +111,17 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 
 				}
 			} else if ( e.getSource() == artiste.getBtnNouveau() ) {
-				artiste.nouvelArtiste( artiste.getTabModel().getRowCount() + 1 );
+				artiste.nouvelArtiste( Integer.parseInt(
+						(String) ( artiste.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) )
+						+ 1 );
 			} else if ( e.getSource() == artiste.getBtnRemplacer() ) {
 				modele.remplacerImage( control.obtenirImage( artiste ), artiste );
 				artiste.getPanelArtiste().repaint();
 			} else if ( e.getSource() == artiste.getBtnRecherche() ) {
 				artiste.getTableArtistes().setModel( control.ajouterImageMembre( modele
 						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
+			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
+				 control.ajouterArtiste(artiste);
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -157,7 +163,12 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			Menu menu = (Menu) frame;
 
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes) frame;
+			GestionArtistes artiste = (GestionArtistes) frame;
+			if ( e.getDocument() == artiste.getTxtNumero().getDocument() ) {
+				artiste.getBtnAjouter().setEnabled( !artiste.getTxtNumero().getText().isEmpty() && ( Integer
+						.parseInt( artiste.getTxtNumero().getText() ) > Integer.parseInt( (String) ( artiste
+								.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) ) ) );
+			}
 
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
@@ -183,12 +194,13 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			GestionArtistes artistes = (GestionArtistes) frame;
 			if ( e.getSource() == artistes.getTableArtistes() ) {
 				Object[] row = control.obtenirUnArtiste( Integer.parseInt( (String) artistes.getTabModel()
-						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ) );
+						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ), artistes );
 				artistes.setArtisteCourrant( row );
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();
 				if ( img != null ) {
-					artistes.setAlbumCourrant( modele.resiseImage( img, 35, 35 ) );
+					artistes.setAlbumCourrant( modele.resiseImage( img, artistes.getPanelAlbum().getHeight(),
+							artistes.getPanelAlbum().getWidth() ) );
 				}
 				artistes.getPanelAlbum().repaint();
 				// TODO fix le wierd bug de loading d'image
