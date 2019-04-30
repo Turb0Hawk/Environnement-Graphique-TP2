@@ -1,11 +1,15 @@
 package controleur;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -14,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
 import modele.*;
 import sun.awt.image.ToolkitImage;
 import vue.*;
@@ -49,8 +55,8 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
-							"Le mot de passe ou le nom d'utilisateur entr�s sont incorrects.", "Mauvais identifiants",
-							JOptionPane.ERROR_MESSAGE );
+							"Le mot de passe ou le nom d'utilisateur entr�s sont incorrects.",
+							"Mauvais identifiants", JOptionPane.ERROR_MESSAGE );
 				}
 
 			} else if ( e.getSource() == conn.getBtnQuitter() ) {
@@ -104,13 +110,22 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					System.out.println( msg );
 
 				}
-			}
-			if(e.getSource() == artistes.getBtnNouveau()) {
-				artistes.nouvelArtiste(artistes.getTableArtistes().getRowCount()+1);
-			}
-			if(e.getSource() == artistes.getBtnRemplacer()) {
-				modele.remplacerImage(control.obtenirImage(artistes), artistes);
-				artistes.getPanelArtiste().repaint();
+			} else if ( e.getSource() == artiste.getBtnNouveau() ) {
+				artiste.nouvelArtiste( Integer.parseInt(
+						(String) ( artiste.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) )
+						+ 1 );
+			} else if ( e.getSource() == artiste.getBtnRemplacer() ) {
+				modele.remplacerImage( control.obtenirImage( artiste ), artiste );
+				artiste.getPanelArtiste().repaint();
+			} else if ( e.getSource() == artiste.getBtnRecherche() ) {
+				artiste.getTableArtistes().setModel( control.ajouterImageMembre( modele
+						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
+			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
+				 control.ajouterArtiste(artiste);
+			} else if (e.getSource() == artiste.getBtnModifier()) {
+				
+			} else if(e.getSource() == artiste.getBtnSupprimer()) {
+				
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -152,7 +167,12 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			Menu menu = (Menu) frame;
 
 		} else if ( frame instanceof GestionArtistes ) {
-			GestionArtistes artistes = (GestionArtistes) frame;
+			GestionArtistes artiste = (GestionArtistes) frame;
+			if ( e.getDocument() == artiste.getTxtNumero().getDocument() ) {
+				artiste.getBtnAjouter().setEnabled( !artiste.getTxtNumero().getText().isEmpty() && ( Integer
+						.parseInt( artiste.getTxtNumero().getText() ) > Integer.parseInt( (String) ( artiste
+								.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) ) ) );
+			}
 
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;
@@ -177,12 +197,18 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 		if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artistes = (GestionArtistes) frame;
 			if ( e.getSource() == artistes.getTableArtistes() ) {
-				Object[] row = control.obtenirUnArtiste( artistes.getTableArtistes().getSelectedRow()+1 );
+				int ee = Integer.parseInt( (String) artistes.getTabModel()
+						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) );
+				Object[] row = control.obtenirUnArtiste(  ee, artistes );
 				artistes.setArtisteCourrant( row );
-			}
-			if ( e.getSource() == artistes.getListAlbum() ) {
-				Image img = control.obtenirUnAlbum( artistes.getListAlbum().getSelectedIndex()+1 );
-				artistes.setAlbumCourrant( img );
+			} else if ( e.getSource() == artistes.getListAlbum() ) {
+				Image img = artistes.getListAlbum().getSelectedValue().getImg();
+				if ( img != null ) {
+					artistes.setAlbumCourrant( modele.resiseImage( img, artistes.getPanelAlbum().getHeight(),
+							artistes.getPanelAlbum().getWidth() ) );
+				}
+				artistes.getPanelAlbum().repaint();
+				// TODO fix le wierd bug de loading d'image
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 			GestionAlbums album = (GestionAlbums) frame;

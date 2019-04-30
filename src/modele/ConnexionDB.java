@@ -17,7 +17,9 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import com.sun.xml.internal.messaging.saaj.util.Base64;
 
@@ -71,7 +73,7 @@ public class ConnexionDB {
 		tabArtistes.addColumn( "Membre" );
 		try {
 			statement = conn.createStatement();
-			statement.execute( "SELECT * FROM Artiste" );
+			statement.execute( "SELECT * FROM Artiste ORDER BY Numero ASC" );
 			results = statement.getResultSet();
 			while ( results.next() ) {
 				Object[] row = { results.getString( "Numero" ), results.getString( "Nom_Artiste" ),
@@ -133,9 +135,12 @@ public class ConnexionDB {
 			statement.setString( 1, String.valueOf( artisteId ) );
 			results = statement.executeQuery();
 			while ( results.next() ) {
-				Album album = new Album( results.getInt( "Numero" ), results.getString( "Titre" ),
-						results.getString( "Genre" ), results.getInt( "Annee" ), results.getBytes( "Couverture" ),
-						results.getInt( "Numero_Artiste_Principal" ) );
+				Album album = ( results.getBytes( "Couverture" ) == null ? new Album( results.getInt( "Numero" ),
+						results.getString( "Titre" ), results.getString( "Genre" ), results.getInt( "Annee" ),
+						results.getInt( "Numero_Artiste_Principal" ) )
+						: new Album( results.getInt( "Numero" ), results.getString( "Titre" ),
+								results.getString( "Genre" ), results.getInt( "Annee" ),
+								results.getBytes( "Couverture" ), results.getInt( "Numero_Artiste_Principal" ) ) );
 				tabAlbums.addElement( album );
 			}
 		} catch ( SQLException e ) {
@@ -166,6 +171,7 @@ public class ConnexionDB {
 
 	public void remplacerImage( BufferedImage image, GestionArtistes artiste ) {
 		byte[] photo = imageToByte( image );
+		artiste.setImageArtiste( image );
 		artiste.getPanelArtiste().removeAll();
 		artiste.getPanelArtiste().add( new JLabel( new ImageIcon( resiseImage( image, 35, 35 ) ) ) );
 		artiste.getPanelArtiste().repaint();
@@ -176,7 +182,8 @@ public class ConnexionDB {
 		try {
 			statement = conn.prepareStatement( "UPDATE Artiste SET Photo = ? WHERE Numero = ?" );
 			statement.setBytes( 1, photo );
-			statement.setLong( 2, ( artiste.getTableArtistes().getSelectedRow() + 1 ) );
+			statement.setLong( 2, ( Integer.parseInt(
+					(String) artiste.getTabModel().getValueAt( artiste.getTableArtistes().getSelectedRow(), 0 ) ) ) );
 			statement.executeUpdate();
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -203,7 +210,52 @@ public class ConnexionDB {
 			imageByte = baos.toByteArray();
 		} catch ( IOException ioe ) {
 			imageByte = null;
+		} catch ( IllegalArgumentException iae ) {
+			imageByte = null;
 		}
 		return imageByte;
+	}
+
+	public DefaultTableModel obtenirArtistesRecherche( String txtRecherche, TableModel tabModel ) {
+		connUp();
+		ResultSet results = null;
+		PreparedStatement statement;
+		DefaultTableModel tabArtistes = new DefaultTableModel();
+		tabArtistes.addColumn( "Numero" );
+		tabArtistes.addColumn( "Nom_Artiste" );
+		tabArtistes.addColumn( "Membre" );
+		try {
+			statement = conn.prepareStatement( "SELECT * FROM Artiste WHERE Nom_Artiste LIKE ?" );
+			statement.setString( 1, "%" + txtRecherche + "%" );
+			statement.execute();
+			results = statement.getResultSet();
+			while ( results.next() ) {
+				Object[] row = { results.getString( "Numero" ), results.getString( "Nom_Artiste" ),
+						results.getBoolean( "Membre" ) };
+				tabArtistes.addRow( row );
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
+		return tabArtistes;
+	}
+
+	public void ajoutArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
+		byte[] photoBytes = imageToByte( photo );
+		connUp();
+		ResultSet results = null;
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement( "INSERT INTO Artiste VALUES (?, ?, ?, ?);" );
+			statement.setInt( 1, num );
+			statement.setString( 2, nom );
+			statement.setBoolean( 3, membre );
+			statement.setBytes( 4, photoBytes );
+			statement.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
 	}
 }

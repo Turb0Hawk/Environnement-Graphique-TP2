@@ -12,9 +12,9 @@ public class Album {
 	
 	int numero, annee, numArtiste;
 	String titre,  genre;
-	byte[] couverture;
-	Image img;
-	BufferedImage bImage;
+	byte[] couverture = null;
+	Image img = null;
+	BufferedImage bImage = null;
 	
 	public Album(int numero, String titre, String genre, int annee, byte[] couverture, int numArtiste) {
 		this.numero = numero;
@@ -26,6 +26,14 @@ public class Album {
 		this.img =  new ImageIcon(couverture).getImage();
 	}
 	
+	public Album(int numero, String titre, String genre, int annee, int numArtiste) {
+		this.numero = numero;
+		this.titre = titre;
+		this.genre = genre;
+		this.annee = annee;
+		this.numArtiste = numArtiste;
+	}
+
 	@Override
 	public String toString() {
 		return annee + " - " + titre;
