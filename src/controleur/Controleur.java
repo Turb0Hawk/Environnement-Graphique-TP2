@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -17,6 +19,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
+import vue.Connexion;
 import vue.GestionArtistes;
 import vue.Menu;
 
@@ -57,8 +60,7 @@ public class Controleur {
 			try {
 				ByteArrayInputStream bis = new ByteArrayInputStream( (byte[]) row[3] );
 				BufferedImage bImage = ImageIO.read( bis );
-				row[3] = bImage.getScaledInstance( 75,
-						75, Image.SCALE_SMOOTH );
+				row[3] = bImage.getScaledInstance( 75, 75, Image.SCALE_SMOOTH );
 			} catch ( IOException e ) {
 				e.printStackTrace();
 			}
@@ -116,22 +118,40 @@ public class Controleur {
 	}
 
 	public void ajouterArtiste( GestionArtistes artiste ) {
-		int num = Integer.parseInt(artiste.getTxtNumero().getText());
+		int num = Integer.parseInt( artiste.getTxtNumero().getText() );
 		String nom = artiste.getTxtNom().getText();
 		boolean membre = artiste.getMembre().isSelected();
 		BufferedImage photo = artiste.getImageArtiste();
-		modele.ajoutArtiste(num, nom, membre, photo);
-		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
-		artiste.getTableArtistes().setRowSelectionInterval( num-1, num-1 );
-		artiste.repaint();
-		
+		Object[] row = { String.valueOf( num ), nom, membre };
+
+		if ( (boolean) row[2] ) {
+			row[2] = createImageIcon( "/ressources/iconTrue.png", "oui" );
+		} else {
+			row[2] = createImageIcon( "/ressources/iconTrue.png", "non" );
+		}
+		modele.ajoutArtiste( num, nom, membre, photo );
+		// artiste.getTableArtistes().setModel( initialiserArtistes(
+		// artiste.getTabModel() ) );
+		artiste.getTabModel().addRow( row );
+		artiste.getTabModel().fireTableRowsInserted( artiste.getTabModel().getRowCount() - 1,
+				artiste.getTableArtistes().getModel().getRowCount() - 1 );
+		artiste.getTableArtistes().setRowSelectionInterval( artiste.getTableArtistes().getModel().getRowCount() - 1,
+				artiste.getTableArtistes().getModel().getRowCount() - 1 );
+
+		// artiste.repaint();
+
 	}
 
 	public void supprimerArtiste( GestionArtistes artiste ) {
-		int num = Integer.parseInt(artiste.getTxtNumero().getText());
-		modele.deleteArtiste(num);
+		int num = Integer.parseInt( artiste.getTxtNumero().getText() );
+		modele.deleteArtiste( num );
 		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
-		artiste.getTableArtistes().setRowSelectionInterval( num-1, num-1 );
+		artiste.getTableArtistes().setRowSelectionInterval( num - 1, num - 1 );
 		artiste.repaint();
+	}
+
+	public void setArtisteCourrant( GestionArtistes artiste, Object[] row ) {
+		modele.setArtisteCourrant( artiste, row, obtenirAlbumsArtiste( Integer.parseInt( (String) row[0] ) ) );
+		
 	}
 }

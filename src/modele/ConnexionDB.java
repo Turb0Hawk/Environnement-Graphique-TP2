@@ -201,7 +201,7 @@ public class ConnexionDB {
 	}
 
 	public static byte[] imageToByte( BufferedImage i ) {
-		// taken directly from :
+		// "borrowed" directly from :
 		// https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4848028
 		byte[] imageByte;
 		try {
@@ -269,5 +269,20 @@ public class ConnexionDB {
 			e.printStackTrace();
 		}
 		connDown();		
+	}
+	
+	public void setArtisteCourrant(GestionArtistes artiste,  Object[] donneesArtiste, DefaultListModel<Album> albums ) {
+		artiste.getTxtNumero().setText( (String) donneesArtiste[0] );
+		artiste.getTxtNom().setText( (String) donneesArtiste[1] );
+		artiste.getMembre().setSelected( (boolean) donneesArtiste[2] );
+		if ( donneesArtiste[3] != null ) {
+			artiste.getPanelArtiste().removeAll();
+			artiste.getPanelArtiste().add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
+			artiste.getPanelArtiste().repaint();
+		} else {
+			// TODO metttre photo no images
+		}
+		artiste.getListAlbum().setModel( albums );
+		artiste.getListAlbum().setSelectedIndex( 1 );
 	}
 }

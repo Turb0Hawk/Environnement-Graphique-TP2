@@ -195,10 +195,10 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 		if ( frame instanceof GestionArtistes ) {
 			GestionArtistes artistes = (GestionArtistes) frame;
 			if ( e.getSource() == artistes.getTableArtistes() ) {
-				int ee = Integer.parseInt( (String) artistes.getTabModel()
-						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) );
+				int ee = Integer.parseInt( (String) (artistes.getTabModel()
+						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ) );
 				Object[] row = control.obtenirUnArtiste( ee, artistes );
-				artistes.setArtisteCourrant( row );
+				control.setArtisteCourrant( artistes, row );
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();
 				if ( img != null ) {
