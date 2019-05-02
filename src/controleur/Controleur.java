@@ -140,17 +140,18 @@ public class Controleur {
 
 	public void supprimerArtiste( GestionArtistes artiste ) {
 		int selected = artiste.getTableArtistes().getSelectedRow();
-		int num = Integer.parseInt( (String)artiste.getTableArtistes().getValueAt( selected, 0 ) );
+		int num = Integer.parseInt( (String) artiste.getTableArtistes().getValueAt( selected, 0 ) );
 		modele.deleteArtiste( num );
-		//artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
+		// artiste.getTableArtistes().setModel( initialiserArtistes(
+		// artiste.getTabModel() ) );
 		artiste.getTabModel().removeRow( selected );
 		artiste.getTabModel().fireTableDataChanged();
 		artiste.getTabModel().fireTableRowsDeleted( selected, selected );
 	}
 
 	public void setArtisteCourrant( GestionArtistes artiste, Object[] row ) {
-		modele.setArtisteCourrant( artiste, row, obtenirAlbumsArtiste( Integer.parseInt( (String) row[0] ) ) );
-		
+		setArtisteCourrant( artiste, row, obtenirAlbumsArtiste( Integer.parseInt( (String) row[0] ) ) );
+
 	}
 
 	public void modifierArtiste( GestionArtistes artiste ) {
@@ -162,16 +163,39 @@ public class Controleur {
 		if ( (boolean) row[2] ) {
 			row[2] = createImageIcon( "/ressources/iconTrue.png", "oui" );
 		} else {
-			row[2] = createImageIcon( "/ressources/iconTrue.png", "non" );
+			row[2] = createImageIcon( "/ressources/iconFalse.png", "non" );
 		}
 		if ( !modele.modifierArtiste( num, nom, membre, photo ) ) {
 			JOptionPane.showMessageDialog( artiste,
 					"Erreur lors de la modification de l'artiste " + num + ".\nL'artiste n'existe pas", "Erreur",
 					JOptionPane.OK_OPTION );
 		}
+		// TODO pull les nouveaux data de la base de données
+		artiste.getTabModel().setValueAt( row[0], artiste.getTableArtistes().getSelectedRow(), 0 );
+		artiste.getTabModel().setValueAt( row[1], artiste.getTableArtistes().getSelectedRow(), 1 );
+		artiste.getTabModel().setValueAt( row[2], artiste.getTableArtistes().getSelectedRow(), 2 );
 		artiste.getTabModel().fireTableDataChanged();
-		//TODO pull les nouveaux data de la base de données
 		artiste.getTabModel().fireTableRowsUpdated( 1, artiste.getTableArtistes().getRowCount() );
-		//TODO updater les vues
+		// TODO updater les vues
+	}
+
+	public void setArtisteCourrant( GestionArtistes artiste, Object[] donneesArtiste,
+			DefaultListModel<Album> albums ) {
+		artiste.getTxtNumero().setText( (String) donneesArtiste[0] );
+		artiste.getTxtNom().setText( (String) donneesArtiste[1] );
+		artiste.getMembre().setSelected( (boolean) donneesArtiste[2] );
+		if ( donneesArtiste[3] != null ) {
+			artiste.getPanelArtiste().removeAll();
+			artiste.getPanelArtiste().add( new JLabel( new ImageIcon( (Image) donneesArtiste[3] ) ) );
+			artiste.getPanelArtiste().repaint();
+		} else {
+			artiste.getPanelArtiste().removeAll();
+			artiste.getPanelArtiste().add( new JLabel( new ImageIcon( modele.resiseImage(
+					Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( "/ressources/default.jpg" ) ), 75,
+					75 ) ) ) );
+			artiste.getPanelArtiste().repaint();
+		}
+		artiste.getListAlbum().setModel( albums );
+		artiste.getListAlbum().setSelectedIndex( 1 );
 	}
 }

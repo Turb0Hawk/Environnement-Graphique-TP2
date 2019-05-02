@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -268,24 +269,10 @@ public class ConnexionDB {
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
-		connDown();		
+		connDown();
 	}
-	
-	public void setArtisteCourrant(GestionArtistes artiste,  Object[] donneesArtiste, DefaultListModel<Album> albums ) {
-		artiste.getTxtNumero().setText( (String) donneesArtiste[0] );
-		artiste.getTxtNom().setText( (String) donneesArtiste[1] );
-		artiste.getMembre().setSelected( (boolean) donneesArtiste[2] );
-		if ( donneesArtiste[3] != null ) {
-			artiste.getPanelArtiste().removeAll();
-			artiste.getPanelArtiste().add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
-			artiste.getPanelArtiste().repaint();
-		} else {
-			// TODO metttre photo no images
-		}
-		artiste.getListAlbum().setModel( albums );
-		artiste.getListAlbum().setSelectedIndex( 1 );
-	}
-	
+
+
 	public boolean modifierArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
 		boolean retour;
 		if ( idArtisteExiste( num ) ) {
@@ -311,8 +298,8 @@ public class ConnexionDB {
 		}
 		return retour;
 	}
-	
-	public boolean idArtisteExiste(int id) {
+
+	public boolean idArtisteExiste( int id ) {
 		connUp();
 		PreparedStatement statement;
 		ResultSet result = null;

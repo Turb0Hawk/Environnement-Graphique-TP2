@@ -132,7 +132,6 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			GestionAlbums album = (GestionAlbums) frame;
 
 			if ( e.getSource() == album.getBtnAide() ) {
-
 				try {
 					File fileAide = new File( Paths.get( "./src/ressources/aide.chm" ).toString() );
 					Desktop.getDesktop().open( fileAide );
@@ -173,9 +172,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 												.getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) ) ) );
 			}
 
-		} /*else if ( frame instanceof GestionAlbums ) {
-			GestionAlbums album = (GestionAlbums) frame;
-		}*/
+		} 
 	}
 
 	@Override
@@ -202,15 +199,15 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();
 				if ( img != null ) {
-					artistes.setAlbumCourrant( modele.resiseImage( img, artistes.getPanelAlbum().getHeight(),
-							artistes.getPanelAlbum().getWidth() ) );
+					artistes.getPanelAlbum().removeAll();
+					artistes.getPanelAlbum().add( new JLabel(new ImageIcon(modele.resiseImage( img, 50, 50 ))));
+					artistes.getPanelAlbum().repaint();
 				}
 				artistes.getPanelAlbum().repaint();
+				artistes.repaint();
 				// TODO fix le wierd bug de loading d'image
 			}
-		} /*else if ( frame instanceof GestionAlbums ) {
-			GestionAlbums album = (GestionAlbums) frame;
-		}*/
+		}
 	}
 
 	@Override
