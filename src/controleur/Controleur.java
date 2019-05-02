@@ -4,10 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -16,11 +13,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
-import vue.Connexion;
 import vue.GestionArtistes;
 import vue.Menu;
 
@@ -42,7 +37,7 @@ public class Controleur {
 		ImageIcon imageTrue = createImageIcon( "/Ressources/iconTrue.png", "oui" );
 		for ( int i = 0; i < tabArtistes.getRowCount(); ++i ) {
 
-			if ( (boolean) ( (Vector) tabArtistes.getDataVector().elementAt( i ) ).elementAt( 2 ) ) {
+			if ( (boolean) ( (Vector<?>) tabArtistes.getDataVector().elementAt( i ) ).elementAt( 2 ) ) {
 
 				image = imageTrue;
 			} else {
@@ -170,13 +165,11 @@ public class Controleur {
 					"Erreur lors de la modification de l'artiste " + num + ".\nL'artiste n'existe pas", "Erreur",
 					JOptionPane.OK_OPTION );
 		}
-		// TODO pull les nouveaux data de la base de données
 		artiste.getTabModel().setValueAt( row[0], artiste.getTableArtistes().getSelectedRow(), 0 );
 		artiste.getTabModel().setValueAt( row[1], artiste.getTableArtistes().getSelectedRow(), 1 );
 		artiste.getTabModel().setValueAt( row[2], artiste.getTableArtistes().getSelectedRow(), 2 );
 		artiste.getTabModel().fireTableDataChanged();
 		artiste.getTabModel().fireTableRowsUpdated( 1, artiste.getTableArtistes().getRowCount() );
-		// TODO updater les vues
 	}
 
 	public void setArtisteCourrant( GestionArtistes artiste, Object[] donneesArtiste,

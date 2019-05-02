@@ -1,11 +1,9 @@
 package modele;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,20 +16,13 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import com.sun.xml.internal.messaging.saaj.util.Base64;
 
 import vue.*;
 
 public class ConnexionDB {
 
-	private static final String user = "BiblioAdmin";
-	private static final String password = "MusiqueAdmin";
-	private static final String urlConnection = "jdbc:mysql://localhost/BibliothequeDeMusique?user=" + user
-			+ "&password=" + password + "&serverTimezone=UTC";
 	private static final String UrlSqlLite = "jdbc:sqlite:" + Paths.get( "./src/BibliothequeMusique.db" ).toString();
 
 	public Connection conn = null;
@@ -176,7 +167,6 @@ public class ConnexionDB {
 		artiste.getPanelArtiste().removeAll();
 		artiste.getPanelArtiste().add( new JLabel( new ImageIcon( resiseImage( image, 35, 35 ) ) ) );
 		artiste.getPanelArtiste().repaint();
-		// TODO insérer l'image dans la db
 		connUp();
 		PreparedStatement statement;
 
