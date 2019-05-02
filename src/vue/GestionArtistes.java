@@ -319,21 +319,7 @@ public class GestionArtistes extends JFrame {
 		btnSupprimer.addActionListener( event );
 	}
 
-	public void setArtisteCourrant( Object[] donneesArtiste ) {
-		txtNumero.setText( (String) donneesArtiste[0] );
-		txtNom.setText( (String) donneesArtiste[1] );
-		chckbxMembre.setSelected( (boolean) donneesArtiste[2] );
-		if ( donneesArtiste[3] != null ) {
-			panel_1.removeAll();
-			panel_1.add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
-			panel_1.repaint();
-		} else {
-			// TODO metttre photo no images
-		}
-		tabAlbums = control.obtenirAlbumsArtiste( Integer.parseInt( (String) donneesArtiste[0] ) );
-		listArtiste.setSelectedIndex( 1 );
-		listArtiste.setModel( tabAlbums );
-	}
+	
 
 	public void setAlbumCourrant( Image img ) {
 		panel_2.removeAll();
@@ -347,8 +333,10 @@ public class GestionArtistes extends JFrame {
 		chckbxMembre.setSelected( false );
 		txtNumero.setText( String.valueOf( nb ) );
 		txtNom.setText( "" );
-		if ( !tabAlbums.isEmpty() ) {
-			tabAlbums.clear();
+		if ( tabAlbums != null ) {
+			if ( !tabAlbums.isEmpty() ) {
+				tabAlbums.clear();
+			} 
 		}
 		panel_1.removeAll();
 		panel_2.removeAll();

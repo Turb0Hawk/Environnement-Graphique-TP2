@@ -201,7 +201,7 @@ public class ConnexionDB {
 	}
 
 	public static byte[] imageToByte( BufferedImage i ) {
-		// taken directly from :
+		// "borrowed" directly from :
 		// https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4848028
 		byte[] imageByte;
 		try {
@@ -244,7 +244,6 @@ public class ConnexionDB {
 	public void ajoutArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
 		byte[] photoBytes = imageToByte( photo );
 		connUp();
-		ResultSet results = null;
 		PreparedStatement statement;
 		try {
 			statement = conn.prepareStatement( "INSERT INTO Artiste VALUES (?, ?, ?, ?);" );
@@ -257,5 +256,79 @@ public class ConnexionDB {
 			e.printStackTrace();
 		}
 		connDown();
+	}
+
+	public void deleteArtiste( int num ) {
+		connUp();
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement( "DELETE FROM Artiste WHERE Numero = ?" );
+			statement.setInt( 1, num );
+			statement.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();		
+	}
+	
+	public void setArtisteCourrant(GestionArtistes artiste,  Object[] donneesArtiste, DefaultListModel<Album> albums ) {
+		artiste.getTxtNumero().setText( (String) donneesArtiste[0] );
+		artiste.getTxtNom().setText( (String) donneesArtiste[1] );
+		artiste.getMembre().setSelected( (boolean) donneesArtiste[2] );
+		if ( donneesArtiste[3] != null ) {
+			artiste.getPanelArtiste().removeAll();
+			artiste.getPanelArtiste().add( new JLabel( new ImageIcon( (Image)donneesArtiste[3] ) ) );
+			artiste.getPanelArtiste().repaint();
+		} else {
+			// TODO metttre photo no images
+		}
+		artiste.getListAlbum().setModel( albums );
+		artiste.getListAlbum().setSelectedIndex( 1 );
+	}
+	
+	public boolean modifierArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
+		boolean retour;
+		if ( idArtisteExiste( num ) ) {
+			byte[] photoBytes = imageToByte( photo );
+			connUp();
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(
+						"UPDATE Artiste SET Nom_Artiste = ?, Membre = ?, Photo = ? WHERE Numero = ?;" );
+				statement.setString( 1, nom );
+				statement.setBoolean( 2, membre );
+				statement.setBytes( 3, photoBytes );
+				statement.setInt( 4, num );
+				statement.execute();
+				retour = true;
+			} catch ( SQLException e ) {
+				e.printStackTrace();
+				retour = false;
+			}
+			connDown();
+		} else {
+			retour = false;
+		}
+		return retour;
+	}
+	
+	public boolean idArtisteExiste(int id) {
+		connUp();
+		PreparedStatement statement;
+		ResultSet result = null;
+		try {
+			statement = conn.prepareStatement( "SELECT * FROM Artiste WHERE Numero = ?;" );
+			statement.setInt( 1, id );
+			statement.execute();
+			result = statement.getResultSet();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
+		try {
+			return result.next();
+		} catch ( SQLException e ) {
+			return false;
+		}
 	}
 }
