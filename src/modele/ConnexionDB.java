@@ -285,4 +285,50 @@ public class ConnexionDB {
 		artiste.getListAlbum().setModel( albums );
 		artiste.getListAlbum().setSelectedIndex( 1 );
 	}
+	
+	public boolean modifierArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
+		boolean retour;
+		if ( idArtisteExiste( num ) ) {
+			byte[] photoBytes = imageToByte( photo );
+			connUp();
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(
+						"UPDATE Artiste SET Nom_Artiste = ?, Membre = ?, Photo = ? WHERE Numero = ?;" );
+				statement.setString( 1, nom );
+				statement.setBoolean( 2, membre );
+				statement.setBytes( 3, photoBytes );
+				statement.setInt( 4, num );
+				statement.execute();
+				retour = true;
+			} catch ( SQLException e ) {
+				e.printStackTrace();
+				retour = false;
+			}
+			connDown();
+		} else {
+			retour = false;
+		}
+		return retour;
+	}
+	
+	public boolean idArtisteExiste(int id) {
+		connUp();
+		PreparedStatement statement;
+		ResultSet result = null;
+		try {
+			statement = conn.prepareStatement( "SELECT * FROM Artiste WHERE Numero = ?;" );
+			statement.setInt( 1, id );
+			statement.execute();
+			result = statement.getResultSet();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		connDown();
+		try {
+			return result.next();
+		} catch ( SQLException e ) {
+			return false;
+		}
+	}
 }

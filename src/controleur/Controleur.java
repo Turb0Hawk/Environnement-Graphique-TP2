@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -130,28 +131,47 @@ public class Controleur {
 			row[2] = createImageIcon( "/ressources/iconTrue.png", "non" );
 		}
 		modele.ajoutArtiste( num, nom, membre, photo );
-		// artiste.getTableArtistes().setModel( initialiserArtistes(
-		// artiste.getTabModel() ) );
 		artiste.getTabModel().addRow( row );
 		artiste.getTabModel().fireTableRowsInserted( artiste.getTabModel().getRowCount() - 1,
 				artiste.getTableArtistes().getModel().getRowCount() - 1 );
 		artiste.getTableArtistes().setRowSelectionInterval( artiste.getTableArtistes().getModel().getRowCount() - 1,
 				artiste.getTableArtistes().getModel().getRowCount() - 1 );
-
-		// artiste.repaint();
-
 	}
 
 	public void supprimerArtiste( GestionArtistes artiste ) {
-		int num = Integer.parseInt( artiste.getTxtNumero().getText() );
+		int selected = artiste.getTableArtistes().getSelectedRow();
+		int num = Integer.parseInt( (String)artiste.getTableArtistes().getValueAt( selected, 0 ) );
 		modele.deleteArtiste( num );
-		artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
-		artiste.getTableArtistes().setRowSelectionInterval( num - 1, num - 1 );
-		artiste.repaint();
+		//artiste.getTableArtistes().setModel( initialiserArtistes( artiste.getTabModel() ) );
+		artiste.getTabModel().removeRow( selected );
+		artiste.getTabModel().fireTableDataChanged();
+		artiste.getTabModel().fireTableRowsDeleted( selected, selected );
 	}
 
 	public void setArtisteCourrant( GestionArtistes artiste, Object[] row ) {
 		modele.setArtisteCourrant( artiste, row, obtenirAlbumsArtiste( Integer.parseInt( (String) row[0] ) ) );
 		
+	}
+
+	public void modifierArtiste( GestionArtistes artiste ) {
+		int num = Integer.parseInt( artiste.getTxtNumero().getText() );
+		String nom = artiste.getTxtNom().getText();
+		boolean membre = artiste.getMembre().isSelected();
+		BufferedImage photo = artiste.getImageArtiste();
+		Object[] row = { String.valueOf( num ), nom, membre };
+		if ( (boolean) row[2] ) {
+			row[2] = createImageIcon( "/ressources/iconTrue.png", "oui" );
+		} else {
+			row[2] = createImageIcon( "/ressources/iconTrue.png", "non" );
+		}
+		if ( !modele.modifierArtiste( num, nom, membre, photo ) ) {
+			JOptionPane.showMessageDialog( artiste,
+					"Erreur lors de la modification de l'artiste " + num + ".\nL'artiste n'existe pas", "Erreur",
+					JOptionPane.OK_OPTION );
+		}
+		artiste.getTabModel().fireTableDataChanged();
+		//TODO pull les nouveaux data de la base de données
+		artiste.getTabModel().fireTableRowsUpdated( 1, artiste.getTableArtistes().getRowCount() );
+		//TODO updater les vues
 	}
 }

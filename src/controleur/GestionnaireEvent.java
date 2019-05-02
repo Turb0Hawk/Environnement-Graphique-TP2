@@ -123,7 +123,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
 				control.ajouterArtiste( artiste );
 			} else if ( e.getSource() == artiste.getBtnModifier() ) {
-
+				control.modifierArtiste(artiste);
 			} else if ( e.getSource() == artiste.getBtnSupprimer() ) {
 				control.supprimerArtiste(artiste);
 			}
