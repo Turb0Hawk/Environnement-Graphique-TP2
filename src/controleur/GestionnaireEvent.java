@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 import modele.*;
 import vue.*;
@@ -23,7 +24,6 @@ import vue.*;
 public class GestionnaireEvent implements ActionListener, DocumentListener, MouseListener {
 
 	private JFrame frame;
-	private Controleur control = new Controleur();
 	private ConnexionDB modele = new ConnexionDB();
 
 	public GestionnaireEvent( JFrame frame ) {
@@ -111,17 +111,17 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 						(String) ( artiste.getTabModel().getValueAt( artiste.getTabModel().getRowCount() - 1, 0 ) ) )
 						+ 1 );
 			} else if ( e.getSource() == artiste.getBtnRemplacer() ) {
-				modele.remplacerImage( control.obtenirImage( artiste ), artiste );
+				modele.remplacerImage( modele.obtenirImage( artiste ), artiste );
 				artiste.getPanelArtiste().repaint();
 			} else if ( e.getSource() == artiste.getBtnRecherche() ) {
-				artiste.getTableArtistes().setModel( control.ajouterImageMembre( modele
+				artiste.getTableArtistes().setModel( modele.ajouterImageMembre( modele
 						.obtenirArtistesRecherche( artiste.getTxtArtiste().getText(), artiste.getTabModel() ) ) );
 			} else if ( e.getSource() == artiste.getBtnAjouter() ) {
-				control.ajouterArtiste( artiste );
+				modele.ajouterArtiste( artiste );
 			} else if ( e.getSource() == artiste.getBtnModifier() ) {
-				control.modifierArtiste(artiste);
+				modele.modifierArtiste(artiste);
 			} else if ( e.getSource() == artiste.getBtnSupprimer() ) {
-				control.supprimerArtiste(artiste);
+				modele.supprimerArtiste(artiste);
 			}
 		} else if ( frame instanceof GestionAlbums ) {
 
@@ -190,8 +190,8 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 			if ( e.getSource() == artistes.getTableArtistes() ) {
 				int ee = Integer.parseInt( (String) (artistes.getTabModel()
 						.getValueAt( artistes.getTableArtistes().getSelectedRow(), 0 ) ) );
-				Object[] row = control.obtenirUnArtiste( ee, artistes );
-				control.setArtisteCourrant( artistes, row );
+				Object[] row = modele.obtenirUnArtiste( ee, artistes );
+				modele.setArtisteCourrant( artistes, row );
 			} else if ( e.getSource() == artistes.getListAlbum() ) {
 				Image img = artistes.getListAlbum().getSelectedValue().getImg();
 				if ( img != null ) {
@@ -224,6 +224,10 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 	@Override
 	public void mouseReleased( MouseEvent e ) {
 
+	}
+
+	public DefaultTableModel initialiserArtistes( DefaultTableModel tabArtiste ) {
+		return modele.initialiserArtistes( tabArtiste );
 	}
 
 }

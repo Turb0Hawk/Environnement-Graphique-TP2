@@ -7,16 +7,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import controleur.*;
 import modele.Album;
-
 import java.awt.GridBagLayout;
 import java.awt.Image;
-
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
-
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,7 +43,6 @@ public class GestionArtistes extends JFrame {
 	private JButton btnAide;
 	private GestionnaireEvent event;
 	private DefaultTableModel tabArtiste;
-	private Controleur control = new Controleur();
 	private JScrollPane scrollPane;
 	private JCheckBox chckbxMembre;
 	private JPanel panel_1;
@@ -157,7 +153,7 @@ public class GestionArtistes extends JFrame {
 		gbc_scrollPane.gridx = 2;
 		gbc_scrollPane.gridy = 4;
 		panel.add( scrollPane, gbc_scrollPane );
-		tabArtiste = control.initialiserArtistes( tabArtiste );
+		tabArtiste = event.initialiserArtistes( tabArtiste );
 		tableArtistes = new JTable( tabArtiste ) {
 			private static final long serialVersionUID = 1L;
 
