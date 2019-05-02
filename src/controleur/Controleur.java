@@ -170,13 +170,11 @@ public class Controleur {
 					"Erreur lors de la modification de l'artiste " + num + ".\nL'artiste n'existe pas", "Erreur",
 					JOptionPane.OK_OPTION );
 		}
-		// TODO pull les nouveaux data de la base de données
 		artiste.getTabModel().setValueAt( row[0], artiste.getTableArtistes().getSelectedRow(), 0 );
 		artiste.getTabModel().setValueAt( row[1], artiste.getTableArtistes().getSelectedRow(), 1 );
 		artiste.getTabModel().setValueAt( row[2], artiste.getTableArtistes().getSelectedRow(), 2 );
 		artiste.getTabModel().fireTableDataChanged();
 		artiste.getTabModel().fireTableRowsUpdated( 1, artiste.getTableArtistes().getRowCount() );
-		// TODO updater les vues
 	}
 
 	public void setArtisteCourrant( GestionArtistes artiste, Object[] donneesArtiste,

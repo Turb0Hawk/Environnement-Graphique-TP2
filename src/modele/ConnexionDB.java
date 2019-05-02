@@ -176,7 +176,6 @@ public class ConnexionDB {
 		artiste.getPanelArtiste().removeAll();
 		artiste.getPanelArtiste().add( new JLabel( new ImageIcon( resiseImage( image, 35, 35 ) ) ) );
 		artiste.getPanelArtiste().repaint();
-		// TODO insérer l'image dans la db
 		connUp();
 		PreparedStatement statement;
 
