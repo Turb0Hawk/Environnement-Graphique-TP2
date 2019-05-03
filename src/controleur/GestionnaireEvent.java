@@ -39,7 +39,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 				if ( ConnexionApp.verificationConn( conn.getTxtUser().getText(), conn.getTxtMDP().getText() ) ) {
 
 					switch ( JOptionPane.showConfirmDialog( conn, "Bienvenue, " + conn.getTxtUser().getText() + "!",
-							"Connexion � l'application", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
+							"Connexion \u00E0 l'application", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE ) ) {
 					case JOptionPane.YES_OPTION:
 
 						frame.dispose();
@@ -51,7 +51,7 @@ public class GestionnaireEvent implements ActionListener, DocumentListener, Mous
 					}
 				} else {
 					JOptionPane.showMessageDialog( conn,
-							"Le mot de passe ou le nom d'utilisateur entr�s sont incorrects.",
+							"Le mot de passe ou le nom d'utilisateur entr\u00E9s sont incorrects.",
 							"Mauvais identifiants", JOptionPane.ERROR_MESSAGE );
 				}
 

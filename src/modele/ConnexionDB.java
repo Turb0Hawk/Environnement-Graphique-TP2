@@ -66,7 +66,13 @@ public class ConnexionDB {
 		connUp();
 		ResultSet results = null;
 		Statement statement;
-		DefaultTableModel tabArtistes = new DefaultTableModel();
+		DefaultTableModel tabArtistes = new DefaultTableModel() {
+			private static final long serialVersionUID = 87L;
+
+			public boolean isCellEditable( int row, int column ) {
+				return false;
+			}
+		};
 		tabArtistes.addColumn( "Numero" );
 		tabArtistes.addColumn( "Nom_Artiste" );
 		tabArtistes.addColumn( "Membre" );
@@ -269,7 +275,6 @@ public class ConnexionDB {
 		connDown();
 	}
 
-
 	public boolean modifierArtiste( int num, String nom, boolean membre, BufferedImage photo ) {
 		boolean retour;
 		if ( idArtisteExiste( num ) ) {
@@ -376,8 +381,7 @@ public class ConnexionDB {
 		java.net.URL imgURL = getClass().getResource( path );
 		if ( imgURL != null ) {
 			Image Image = null;
-			Image = resiseImage( Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15,
-					15 );
+			Image = resiseImage( Toolkit.getDefaultToolkit().getImage( Menu.class.getResource( path ) ), 15, 15 );
 			return new ImageIcon( Image, description );
 		} else {
 			System.err.println( "Couldn't find file: " + path );
