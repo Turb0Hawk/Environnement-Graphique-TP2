@@ -1,0 +1,438 @@
+log
+commit a57c07e3cc6b2e82c06b598ed61ad47d9790715d
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu May 02 20:54:54 2019 -0400
+
+    entr?s inutiles dans la db sont delet?s
+
+commit 524b397befe0b6d754ffdced70197d9d1d48b5e4
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 20:14:53 2019 -0400
+
+    ajout des photsd d<album
+
+commit 40c9d657aa62a7b23c27b6b6bd955b1f1cbf7bea
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu May 02 20:02:03 2019 -0400
+
+    jtable non-editable et regl? les "?" mal convertis
+
+commit c2a38b807776f8479cf90972b14687ff25bfb94e
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 19:51:51 2019 -0400
+
+    true mvc is here
+
+commit 3e89f79c84c14a5176f6b77c43f69cb0ec06857d
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu May 02 19:43:09 2019 -0400
+
+    enlev? les avertissements d'imports inutiles.
+
+commit 17ed08a752ff94cbb656a924e760513607af66b7
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 19:02:35 2019 -0400
+
+    Merge branch 'Dev-Dav' into CurrentBuild
+
+commit 8566fff5c776c7648424c72d56e26cb95280adf0
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 19:02:08 2019 -0400
+
+    updates
+
+commit 29d4690a68170e5d7404319a8ba1448e49613d49
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 17:16:52 2019 -0400
+
+    fin de merge
+
+commit 2a0a0ed311196a36fd238cb020014e19fb27e011
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 17:14:09 2019 -0400
+
+    Merge branch 'Dev-Dav' into CurrentBuild
+
+commit 717924249a5f18c2fc3a17a34eba6ac7bb8e53f1
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu May 02 17:05:37 2019 -0400
+
+    Re added btn modifier
+
+commit 22cadebdf9e750558bf841f8cf08c010aa01fe56
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Tue Apr 30 11:45:16 2019 -0400
+
+    Fixed the issue with adding a new Artist
+
+commit 4a67d301a9132bffa986d0e83a1279a5a1359461
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 30 11:00:55 2019 -0400
+
+    delet? fichiers inutiles et modifi? le .gitignore
+
+commit bae8df5dbb180536071e91b40076fb1a39539493
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 30 10:10:00 2019 -0400
+
+    merge avec Dev-Nic sauf aide.gui
+
+commit 58ec1b1e33faf03b315178d88c9fa853bd4d3249
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 30 00:44:08 2019 -0400
+
+    Termin? la gestion d'artiste et le menu dans le fichier projet de l'aide en ligne
+
+commit abb903b2722c96a54bb383d52f1807b9e9ebdbfe
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 29 23:30:15 2019 -0400
+
+    eod
+
+commit cd05fac32f11cfc7fa43cd6b5331e2e9d2f891ed
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Mon Apr 29 23:15:16 2019 -0400
+
+    probleme de merge avec le bouton d'aide dans la GestionAristes r?gl? et event maintenant fonctionnel partout.
+
+commit 645de0b59f48dc4e9b6fd9054688ee42482b69d4
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 29 22:51:05 2019 -0400
+
+    Merge branch 'Dev-Nic' into CurrentBuild
+
+commit e229e7914ba7187d392d874ed2232fec0d4d8614
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 29 22:50:55 2019 -0400
+
+    Merge branch 'Dev-Dav' into CurrentBuild
+
+commit 3edbcdefa0901fbdb3923062032047b7ab0e285f
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 29 22:48:58 2019 -0400
+
+    push pre merge
+
+commit 38c768ef93688531a6b86f75e36f64636272c247
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 29 21:56:17 2019 -0400
+
+    petit push pour le screen shot
+
+commit e5db53a0e2a5ff32f3459b606cfc7eb333f66f53
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Sat Apr 27 01:24:08 2019 -0400
+
+    termin? 1 point sur 4 dans l'aide en ligne.
+
+commit 979b3eb493ff04f8515276512081037a4bff466a
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Fri Apr 26 23:22:44 2019 -0400
+
+    Rec herche Fonctionne caliss que c'est croustillant
+
+commit acbe17d7b67091dfee0e7201957f1a9eb39a54b3
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Fri Apr 26 22:14:17 2019 -0400
+
+    fixed merge issues
+
+commit 534c03e56d9c146de912146a4b124e43b0dea7ee
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Fri Apr 26 22:09:06 2019 -0400
+
+    Merge branch 'Dev-Nic' into CurrentBuild
+
+commit 1792fcebb3a63ab21a98aeb1fc525ec5bfc124bb
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Fri Apr 26 22:08:06 2019 -0400
+
+    Merge branch 'Dev-Dav' into CurrentBuild
+
+commit 5eba2a6cb18cab348427ce5c400588832c697094
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Fri Apr 26 22:07:26 2019 -0400
+
+    we mergin boi
+
+commit f9c18da32edfac1d3917c71fa2932069ada33a59
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Fri Apr 26 22:06:09 2019 -0400
+
+    refactoring TR?S mineur...
+
+commit 6b82ab0f62929359345d276cbb414cde067ae740
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Fri Apr 26 22:05:17 2019 -0400
+
+    des fichiers inutiles ont ?t? supprim?s
+
+commit 645a7eca19b0039c42eb1514893b840b1e430eca
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Fri Apr 26 22:03:26 2019 -0400
+
+    Code pour ouvrir l'aide ?crit et un fichier temporaire pour tester l'aide a ?t? ajout?.
+
+commit 3d4b0a001040ebc333473883d0b954b9890db1a5
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Fri Apr 26 20:07:52 2019 -0400
+
+    Ajout? les evenements et les boutons pour l'aide en ligne.
+
+commit 9ac33dd8a5f79365e18a96245f4ec408955e8f2f
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Fri Apr 26 11:32:24 2019 -0400
+
+    going to eat
+
+commit c391bd78cb2967955689123c91bd71499fdd0a30
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Thu Apr 25 16:42:39 2019 -0400
+
+    reeee
+
+commit 76764ce67cf70497acd46cae952cef159896492a
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Thu Apr 25 12:11:09 2019 -0400
+
+    Started event remplacer
+
+commit 28803bc70b66bde059ff026cdb6674bfda72b302
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Thu Apr 25 11:54:35 2019 -0400
+
+    wen sqllite now i guess
+
+commit 3cede9faf086bce29df130009615092f25981e08
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 06:14:39 2019 -0400
+
+    changed some database password chenanigans
+
+commit a623291d4afccc06a37bf5a3959af5fae47db46b
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 06:12:11 2019 -0400
+
+    fixed post merge issues
+
+commit 5e252a7b6ec69c5a20df59ede12a3280c5b5f4ff
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 06:09:24 2019 -0400
+
+    Merge branch 'Dev-Nic' into CurrentBuild
+    
+    creation du build
+
+commit 5d50d7a7b21446ab38257778a84b637e88f720ab
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 06:02:12 2019 -0400
+
+    Merge branch 'Dev-Dav' into CurrentBuild
+
+commit f50404c1f48e6a2cf0e9b18dc392bddd7dcfd307
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 06:01:51 2019 -0400
+
+    Did changes for future merging and fixed some imports
+
+commit f558df9c6c6c56448d9147e13b148ed13e1b80a4
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 05:52:57 2019 -0400
+
+    Event Nouveau fonctionne
+
+commit 067a78b1284c552d180640bde00f93d91914d0f1
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 05:29:18 2019 -0400
+
+    Events de selection d'artiste et d'affichage de ceux ci finit
+    
+    ye manque juste a add les photos dans la bd pour voir si tout tombe a terre....
+
+commit d353d3c7f1944f978b0365761befa805d154ac4c
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 03:44:57 2019 -0400
+
+    Changed the lookandfeel
+    
+    W???????H??????A???T???? ???C???A???N??? ???I? ???????S?A?????Y???? ??E??????X??????C??E??????P??T????? ????Y?????OU???'??R????E?????? ????W?E???????L????C??????O?M????E
+
+commit 5e4f84e3c6ad3a2a2d5ac21f516858fe59df03da
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 03:37:43 2019 -0400
+
+    Ajout des images dans la Jtable
+    
+    THE IMAGES WORK I AM A GOD AHAHAHAHAHAHA
+
+commit e79f52c40c7164a38bcad4a86d0beb6908280819
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu Apr 25 01:20:00 2019 -0400
+
+    termin? la connexion ? l'application. 3 utilisateurs
+
+commit 780cc51e6f04b203ac52257583647256ff8a4bea
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 01:06:17 2019 -0400
+
+    dodo time
+
+commit b6b9cf81f757da47ee59b4a67c6bb0f4b139860f
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 01:01:20 2019 -0400
+
+    ye we done for the night
+
+commit 1f653eae8abdc79093f5fcf8dc53e8db9fbacb31
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu Apr 25 00:51:53 2019 -0400
+
+    Regl? le probl?me avec la page de Connection qui ne voulait pas dispose()
+
+commit d9399925439181638e84e732908903c51d0f6bfa
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 00:22:46 2019 -0400
+
+    actual fin du merge
+
+commit 8f3c520df3f3e1ef40651707e96cbe67b08b4529
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Thu Apr 25 00:16:47 2019 -0400
+
+    test?
+
+commit 630e19ce9a4b6ab2f648c8bc0f379762d6ed010c
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu Apr 25 00:11:34 2019 -0400
+
+    mini refactoring de rien du tout.
+
+commit 5d10c98ccacc74f621288a716ed8810fb0893979
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Thu Apr 25 00:06:50 2019 -0400
+
+    R?gl? les problemes caus?s par travailler ? deux sur la m?me branche! Thx David! ;)
+
+commit 2fcabe315380ee5fcb5ff284044e25b30e4cfa49
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Wed Apr 24 23:57:15 2019 -0400
+
+    Events menu done
+
+commit 2b528ffd4aef66bfbbc1f779245c659392912a3a
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Wed Apr 24 23:55:24 2019 -0400
+
+    Events du menu done
+
+commit 44fa0fcb082412188614ef0e27d16d20df25f2cd
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Wed Apr 24 21:52:27 2019 -0400
+
+    Merge branch 'Dev-Dav' into Dev-Nic
+
+commit ae2d48da90a755a401f2ccfc8b8d4941db0ef8e3
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Wed Apr 24 21:49:56 2019 -0400
+
+    G?n?ralisation du controlleur d'event
+
+commit a8cb0237fbb31067b2f6a4c5fb6a02161d4523ac
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Tue Apr 23 23:37:14 2019 -0400
+
+    did most of the modele, moved arround some jars
+
+commit 1183af2a079be940c1b0bd9ff316d6fe7d8da759
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 23 13:33:16 2019 -0400
+
+    Commenc? les ?v?nements de la vue Connexion et mise en place du controleur
+
+commit d7453c9374b0d0afdfaf4dee60de7aa915a0a972
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 22 22:04:28 2019 -0400
+
+    Merge branch 'Dev-Dav'
+
+commit eac3d9106bd0c8a95e92bebf5eca4a20f9945c8d
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 22 22:03:57 2019 -0400
+
+    Added the Ressources package
+
+commit 5a436118af36d4580c84adc8b2fb3cbba4101ccf
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 22 21:57:27 2019 -0400
+
+    Merge branch 'Dev-Nic' into Dev-Dav
+
+commit 951c5178d7cfa72c3e99b0b60808d0102401e2cc
+Author: David Ringuet <davidringuet500@gmail.com>
+Date:   Mon Apr 22 21:56:55 2019 -0400
+
+    Menu et databvase sont finit
+
+commit 117389bb4ca85d9650c7accc400423434eb25ea0
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Mon Apr 22 21:21:08 2019 -0400
+
+    termin? les vues GestionAlbums et GestionArtistes.
+
+commit 100cf96c4f79f11ec93ad69eb528b64631fff0e0
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Wed Apr 17 11:21:19 2019 -0400
+
+    Probl?me d'affichage regl? dans GestionAlbums
+
+commit 82196fa900b2d09efcd8c886db79d0455888ec01
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Wed Apr 17 11:03:04 2019 -0400
+
+    Termin? la vue GestionArtistes
+
+commit d7937629866344562cab3c1a32f0a226860214f3
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 16 12:15:42 2019 -0400
+
+    Commenc? la vue GestionArtistes.
+
+commit 26d34ef1a3cc293be41690a312eef8c5152c4339
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 16 11:58:13 2019 -0400
+
+    Ajout des vues GestionArtistes et Albums et ajout de l'icone de l'application
+
+commit ffc4d172c0f2e2c3636394d23a5c6a22b0594cea
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 16 11:34:17 2019 -0400
+
+    Termin? la vue Connexion.
+
+commit 1ccff4ed16616d35d1f6a6da9e5d9d6ed33d5ab2
+Author: AuKain <nico.parr@hotmail.com>
+Date:   Tue Apr 16 10:18:44 2019 -0400
+
+    Cr?ation du projet Eclipse de base
+
+commit bed9851a152fa8ad8b44b944626502ac192665ea
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Fri Apr 12 11:53:16 2019 -0400
+
+    Ajout de documentation
+
+commit e0931e14eb0d1071a576a81f4917eef98be928f0
+Author: Nicolas Parr <44177820+AuKain@users.noreply.github.com>
+Date:   Fri Apr 12 11:51:28 2019 -0400
+
+    Livrable 0
+    
+    Fin du livrable 0 : 
+
+    Organisation du projet et s?paration des t?ches.
+
+commit 4a265a9cb5beb13ad4920614826e420584b1f045
+Author: David Ringuet <shelbydav6@gmail.com>
+Date:   Fri Apr 12 09:32:09 2019 -0400
+
+    Initial commit
